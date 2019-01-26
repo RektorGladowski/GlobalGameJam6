@@ -9,11 +9,16 @@ public class PopupManager : MonoBehaviour
 
 
     void Awake() => instance = this;
-  
 
-    public void ShowRoomCreationPopup ()
+
+    public void ShowRoomCreationPopup()
     {
         GetComponentInChildren<IPopup<RoomTypeSelection>>().OpenPopup(RoomCreationPopupExit);
+    }
+
+    public void ShowRoomCreationPopup(Action<RoomTypeSelection> callback)
+    {
+        GetComponentInChildren<IPopup<RoomTypeSelection>>().OpenPopup(callback);
     }
 
     void RoomCreationPopupExit(RoomTypeSelection rts)

@@ -12,7 +12,10 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Material baracksRoomMaterial;
     [SerializeField] private Material scavengerRoomMaterial;
 
-    private void Awake() { houseManager.OnHouseRebuild = UpdateRooms; }
+    private void Awake() {
+        
+        houseManager.OnHouseRebuild = UpdateRooms;
+    }
     private void OnDestroy() { houseManager.OnHouseRebuild = null; }
 
     Dictionary<string, GameObject> rooms = new Dictionary<string, GameObject>();
@@ -31,10 +34,9 @@ public class RoomGenerator : MonoBehaviour
         {
             if (!rooms.ContainsKey(roomDatas[i].ID))
             {
-                GameObject go = new GameObject("RoomName", typeof(MeshFilter), typeof(MeshRenderer));
+                GameObject go = new GameObject("RoomName", typeof(Room), typeof(MeshFilter), typeof(MeshRenderer));
                 go.GetComponent<MeshFilter>().mesh = roomDatas[i].Mesh;
                 go.GetComponent<MeshRenderer>().material = kitchenMaterial;
-
                 rooms.Add(roomDatas[i].ID, go);
             }
         }

@@ -45,7 +45,6 @@ public class HouseManager : MonoBehaviour
 
     public bool IsTouching(Collider2D collider2d) { return compositeCollider.IsTouching(collider2d); }
     public RoomData[] GetRooms() { return roomDatas.ToArray(); }
-
 }
 
 [System.Serializable]
