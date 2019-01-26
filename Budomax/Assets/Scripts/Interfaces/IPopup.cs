@@ -2,5 +2,5 @@
 
 public interface IPopup<T>
 {
-    void OpenPopup(Action<T> callback);
+    void OpenPopup(T setupData);
 }
