@@ -42,6 +42,7 @@ public class WallBehaviour : MonoBehaviour
         if (interactionMode == WallInteractionMode.Draggable)
         {
             interactionMode = WallInteractionMode.NotTargetable;
+
             wallRb.bodyType = RigidbodyType2D.Dynamic;
         }       
     }
@@ -60,15 +61,9 @@ public class WallBehaviour : MonoBehaviour
         if (interactionMode == WallInteractionMode.Draggable)
         {
             if (Input.GetKey(KeyCode.Q))
-            {
-                //Rotate left
-                transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
-            }
+                transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime); // Rotate left
             else if (Input.GetKey(KeyCode.E))
-            {
-                //Rotate right
-                transform.Rotate(Vector3.forward * -rotationSpeed * Time.deltaTime);
-            }
+                transform.Rotate(Vector3.forward * -rotationSpeed * Time.deltaTime); // Rotate right
         }
     }
 
