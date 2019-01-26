@@ -6,6 +6,8 @@ using PolygonArea;
 public class HouseManager : MonoBehaviour
 {
     // Read all the colliders and create a combined Polygon2D collider from the others. See PolygonCollider2D in the docs, specifically pathCount and SetPath. 
+    public static HouseManager instance;
+
     public CompositeCollider2D compositeCollider { get { if (_compositeCollider == null) _compositeCollider = GetComponent<CompositeCollider2D>(); return _compositeCollider; } }
     private CompositeCollider2D _compositeCollider;
 
@@ -15,7 +17,7 @@ public class HouseManager : MonoBehaviour
     private List<RoomData> roomDatas = new List<RoomData>();
 
     // Rather unnecessary ;)
-    private void Awake() { Rebuild(); }
+    private void Awake() { Rebuild(); instance = this; }
 
     public void Rebuild()
     {
