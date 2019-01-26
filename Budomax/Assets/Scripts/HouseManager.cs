@@ -22,6 +22,7 @@ public class HouseManager : MonoBehaviour
 
     public void Rebuild()
     {
+        roomDatas.Clear();
         outerWalls = new RoomData(new Vector2[] { new Vector2(0, 0), new Vector2(0, 0) });
 
         for (int i = 0; i < compositeCollider.pathCount; i++)
@@ -38,6 +39,8 @@ public class HouseManager : MonoBehaviour
                 Debug.Log(roomData.Area);
             }
         }
+
+        OnHouseRebuild?.Invoke(roomDatas.ToArray());
     }
 
     public bool IsTouching(Collider2D collider2d) { return compositeCollider.IsTouching(collider2d); }
@@ -51,12 +54,14 @@ public class RoomData
     public Vector2[] Points { get; private set; }
     public float Area { get; private set; }
     public Mesh Mesh { get; private set; }
+    public string ID { get; private set; }
 
     public RoomData(Vector2[] points)
     {
         Points = points;
         Area = points.Area();
         Mesh = MeshGenerator.GenerateMesh(Points);
+        ID = Area.ToString() + points.Length + points[0].x.ToString(); 
     }
 
 }
