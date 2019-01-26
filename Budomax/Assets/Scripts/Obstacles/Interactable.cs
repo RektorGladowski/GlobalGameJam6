@@ -1,8 +1,7 @@
 ﻿// Main home does not have this script attached
-using System.Collections.Generic;
 using UnityEngine;
 
-public class WallPlacer : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
     public float rotationSpeed = 200f;
 
@@ -32,6 +31,8 @@ public class WallPlacer : MonoBehaviour
             interactionMode = WallInteractionMode.Draggable;
             mouseOffset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
         }
+
+        if (Input.GetKey(KeyCode.LeftControl)) { GetComponent<IAttachable>().Drop() ; }
     }
 
     public void OnMouseDrag()
