@@ -6,12 +6,8 @@ public class WallPlacer : MonoBehaviour
 {
     public float rotationSpeed = 200f;
 
-    List<GameObject> attachablesInRange = new List<GameObject>();
-    List<GameObject> restictedAreasInRange = new List<GameObject>();
-
     WallInteractionMode interactionMode = WallInteractionMode.Targetable;
     Vector3 mouseOffset;
-
 
     void LateUpdate()
     {
@@ -51,29 +47,9 @@ public class WallPlacer : MonoBehaviour
         if (interactionMode == WallInteractionMode.Draggable)
         {
             interactionMode = WallInteractionMode.NotTargetable;
-            
-            if (CanBePlacedHere()) GetComponent<Wall>()?.PlaceWall(attachablesInRange);
-            else GetComponent<Wall>()?.DropWall();
+            IAttachable attachable = GetComponent<IAttachable>();
+            attachable?.TryAttaching();
         }
-    }
-
-
-
-    bool CanBePlacedHere()
-    {
-        return (attachablesInRange.Count > 0) && restictedAreasInRange.Count == 0;
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("AttachableArea") && !attachablesInRange.Contains(collision.gameObject)) attachablesInRange.Add(collision.gameObject);
-        if (collision.CompareTag("NotAttachableArea") && !restictedAreasInRange.Contains(collision.gameObject)) restictedAreasInRange.Add(collision.gameObject);
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("AttachableArea") && attachablesInRange.Contains(collision.gameObject)) attachablesInRange.Remove(collision.gameObject);
-        if (collision.CompareTag("NotAttachableArea") && restictedAreasInRange.Contains(collision.gameObject)) restictedAreasInRange.Remove(collision.gameObject);
     }
 
     enum WallInteractionMode

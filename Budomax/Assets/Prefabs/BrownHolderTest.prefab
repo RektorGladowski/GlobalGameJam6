@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 3430176386153119000}
   - component: {fileID: 556497799566808916}
   - component: {fileID: 2407235926799712090}
-  - component: {fileID: 5255296733867838253}
   - component: {fileID: 8016724857882706862}
-  - component: {fileID: 5382340491337180902}
+  - component: {fileID: 9209043464108485524}
   m_Layer: 8
   m_Name: BrownHolderTest
   m_TagString: Untagged
@@ -138,33 +137,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5255296733867838253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5100289762153712053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56f7c6ca2166a748b1d1aff4f20815f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycastChecks: 18
-  contactFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 256
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
 --- !u!114 &8016724857882706862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 200
---- !u!114 &5382340491337180902
+--- !u!114 &9209043464108485524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,16 +159,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5100289762153712053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28029f8a5269f764ca5546af5fd60dda, type: 3}
+  m_Script: {fileID: 11500000, guid: 34bc9f9417bf1dc42a55f179155801d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallConfig:
-    structureHP: 30
-    structureGravityMultiplier: 2
-    damageable: 1
-    triggerByDefault: 1
-    defaultRBType: 1
-  neighbours: []
 --- !u!1 &8390282817031195842
 GameObject:
   m_ObjectHideFlags: 0

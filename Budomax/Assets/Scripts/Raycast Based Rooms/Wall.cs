@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour, IDamageable
+public class Wall : MonoBehaviour, IDamageable, IAttachable
 {
     public StructureConfig wallConfig;
 
    
     public List<Wall> neighbours = new List<Wall>();
-    Rigidbody2D wallRb;
-    Collider2D wallCollider;
+    public Rigidbody2D rigidbody2 { get; private set; }
+    public new PolygonCollider2D collider { get; private set; }
     float currentHP;
 
 
@@ -16,25 +16,30 @@ public class Wall : MonoBehaviour, IDamageable
     void Awake()
     {
         // Get Components
-        wallRb = GetComponent<Rigidbody2D>();
-        wallCollider = GetComponent<Collider2D>();
+        rigidbody2 = GetComponent<Rigidbody2D>();
+        collider = GetComponent<PolygonCollider2D>();
 
         // Process config info
-        wallRb.gravityScale = wallConfig.structureGravityMultiplier;
-        wallRb.bodyType = wallConfig.defaultRBType;
-        wallCollider.isTrigger = wallConfig.triggerByDefault;
+        rigidbody2.gravityScale = wallConfig.structureGravityMultiplier;
+        rigidbody2.bodyType = wallConfig.defaultRBType;
+        collider.isTrigger = wallConfig.triggerByDefault;
         currentHP = wallConfig.structureHP;
     }  
 
 
 
-    public void DropWall()
+    public void Drop()
     {
-        wallCollider.isTrigger = true;
-        wallRb.bodyType = RigidbodyType2D.Dynamic;
+        collider.isTrigger = true;
+        rigidbody2.bodyType = RigidbodyType2D.Dynamic;
     }
 
-    public void PlaceWall(List<GameObject> neighbourWalls)
+    public bool TryAttaching()
+    {
+        return false;
+    }
+
+    public bool Attach(List<Collider2D> neighbourWalls)
     {
         for (int nId = 0; nId < neighbourWalls.Count; nId++)
         {
@@ -43,10 +48,12 @@ public class Wall : MonoBehaviour, IDamageable
             tempWall.neighbours.Add(this);
         }
 
-        wallCollider.isTrigger = false;
-        wallRb.bodyType = RigidbodyType2D.Static;
+        collider.isTrigger = false;
+        rigidbody2.bodyType = RigidbodyType2D.Static;
 
         GetComponent<WallRoomChecker>()?.CheckForPossibleRooms();
+
+        return true;
     }
 
 
@@ -59,7 +66,8 @@ public class Wall : MonoBehaviour, IDamageable
             currentHP -= damage;
 
             if (currentHP < 0f)
-                DropWall();
+                Drop();
         }
     }
+
 }
