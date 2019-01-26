@@ -154,7 +154,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 226948880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad9d3fe6adc7e4eb3b51d9496db95c49, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a17990d3469dec4a8167595a9537b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HomeObject: {fileID: 765280061}
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 412048018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab1d3b07e78348a3ad9635ac8f00114, type: 3}
+  m_Script: {fileID: 11500000, guid: 510524e43eddf9842ba5b1b8a811a0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &519420028
@@ -427,15 +427,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 765280061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b957eea7888b1474494a012aadd4436a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ae305b89ed8e0248830c6cd538bdf6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   RoomObjects:
   - {fileID: 1617792850}
   WallObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 412048018}
 --- !u!4 &765280063
 Transform:
@@ -480,14 +477,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1617792850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69a7b02ec1c9049bcbf65a6217e4de22, type: 3}
+  m_Script: {fileID: 11500000, guid: a137d48eeb7aae445bfcc6c43e222900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 412048018}
+  WallObjects: []
 --- !u!212 &1617792852
 SpriteRenderer:
   m_ObjectHideFlags: 0
