@@ -1,7 +1,8 @@
-﻿using System;
+﻿using State;
+using System;
 using UnityEngine;
 
-public class Room : MonoBehaviour
+public class Room : MonoBehaviour, IRoom
 {
     public Action<Room, RoomTypeSelection> OnRoomTypeSelected;
     public RoomTypeSelection roomType;
