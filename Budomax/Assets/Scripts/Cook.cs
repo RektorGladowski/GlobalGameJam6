@@ -8,8 +8,8 @@ public class Cook : MonoBehaviour, IBot
     const float FOOD_WEIGHT = 0.5f;
     const float DISTANCE_WEIGHT = 0.5f;
     const float USE_RADIUS = 0.25f;
-    const int COOKING_SKILL = 5;
-    const float MOVEMENT_FORCE = 1f;
+    const int COOKING_SKILL = 20;
+    const float MOVEMENT_FORCE = 2f;
 
     public GameObject HomeObject;
     float timeElapsed = 0f;
