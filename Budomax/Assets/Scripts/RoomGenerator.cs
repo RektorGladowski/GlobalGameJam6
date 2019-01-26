@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(HouseManager))]
 public class RoomGenerator : MonoBehaviour
 {
+    [SerializeField] private float minimumArea = 0.2f;
+
     public HouseManager houseManager { get { if (_houseManager == null) _houseManager = GetComponent<HouseManager>(); return _houseManager; } }
     private HouseManager _houseManager;
 
@@ -32,7 +34,7 @@ public class RoomGenerator : MonoBehaviour
         // Create new rooms
         for (int i = 0; i < roomDatas.Length; i++)
         {
-            if (!rooms.ContainsKey(roomDatas[i].ID))
+            if (!rooms.ContainsKey(roomDatas[i].ID) && roomDatas[i].Area > minimumArea)
             {
                 GameObject go = new GameObject("RoomName", typeof(Room), typeof(MeshFilter), typeof(MeshRenderer));
                 go.GetComponent<MeshFilter>().mesh = roomDatas[i].Mesh;
