@@ -8,8 +8,14 @@ public class PopupManager : MonoBehaviour
     public Action<RoomTypeSelection> OnRoomTypeSelected;
     public Action<EndGamePopupResult> OnEndGameOptionSelected;
 
+    TutorialPopup tpManager;
 
-    void Awake () => instance = this;
+    void Awake()
+    {
+        instance = this;
+        tpManager = GetComponentInChildren<TutorialPopup>();
+        tpManager?.SetupTutorialPopups();
+    }
 
     #region Room Creation Popup
     public void ShowRoomCreationPopup()
@@ -37,6 +43,18 @@ public class PopupManager : MonoBehaviour
     void EndGamePopupExit (EndGamePopupResult egpr)
     {
         OnEndGameOptionSelected?.Invoke(egpr);
+    }
+    #endregion
+
+    #region Tutorial popups
+    public void ShowTutorialMessage (string msg)
+    {
+        tpManager?.ShowMessage(msg);
+    }
+
+    public void HidePreviousTutorialMessage ()
+    {
+        tpManager?.HidePreviousMessage();
     }
     #endregion
 }
