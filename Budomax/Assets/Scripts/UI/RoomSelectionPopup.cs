@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomCreationPopup : MonoBehaviour, IPopup<RoomTypeSelection>
+public class RoomSelectionPopup : MonoBehaviour, IPopup<RoomTypeSelection>
 {
     public GameObject PopupPanel;
     public Button kitchenButton, scavButton, barracksButton;
