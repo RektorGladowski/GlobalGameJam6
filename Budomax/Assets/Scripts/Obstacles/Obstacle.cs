@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(PolygonCollider2D), typeof(Rigidbody2D), typeof(Interactable))]
 public class Obstacle : MonoBehaviour, IAttachable
 {
     public new PolygonCollider2D collider { get { if (_collider == null) _collider = GetComponent<PolygonCollider2D>(); return _collider; } }

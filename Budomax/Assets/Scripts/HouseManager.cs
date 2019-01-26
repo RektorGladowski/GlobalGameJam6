@@ -35,16 +35,28 @@ public class HouseManager : MonoBehaviour
             if (outerWalls.Area < roomData.Area) outerWalls = roomData;
             else
             {
+                Debug.Log("AREA: " + roomData.Area);
                 roomDatas.Add(roomData);
-                Debug.Log(roomData.Area);
             }
         }
+
+        Debug.Log("Height: " + GetHeight(outerWalls));
 
         OnHouseRebuild?.Invoke(roomDatas.ToArray());
     }
 
     public bool IsTouching(Collider2D collider2d) { return compositeCollider.IsTouching(collider2d); }
     public RoomData[] GetRooms() { return roomDatas.ToArray(); }
+
+    private float GetHeight(RoomData roomData)
+    {
+        float max = 0f;
+        for (int i = 0; i < roomData.Points.Length; i++)
+        {
+            if (roomData.Points[i].y > max) max = roomData.Points[i].y;
+        }
+        return max;
+    }
 }
 
 [System.Serializable]

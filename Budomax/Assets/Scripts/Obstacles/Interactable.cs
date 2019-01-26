@@ -1,7 +1,8 @@
 ﻿// Main home does not have this script attached
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Interactable : MonoBehaviour
+public class Interactable : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public float rotationSpeed = 200f;
 
@@ -24,20 +25,7 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void OnMouseDown()
-    {
-        Debug.Log("OnMouseDown");
-
-        if (interactionMode == WallInteractionMode.Targetable)
-        {
-            interactionMode = WallInteractionMode.Draggable;
-            mouseOffset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
-        }
-
-        if (Input.GetKey(KeyCode.LeftControl)) { GetComponent<IAttachable>().Drop() ; }
-    }
-
-    public void OnMouseDrag()
+    public void OnDrag(PointerEventData eventData)
     {
         if (interactionMode == WallInteractionMode.Draggable)
         {
@@ -45,7 +33,18 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void OnMouseUp()
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (interactionMode == WallInteractionMode.Targetable)
+        {
+            interactionMode = WallInteractionMode.Draggable;
+            mouseOffset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl)) { GetComponent<IAttachable>().Drop(); }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
     {
         if (interactionMode == WallInteractionMode.Draggable)
         {
