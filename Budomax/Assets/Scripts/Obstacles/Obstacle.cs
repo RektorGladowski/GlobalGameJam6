@@ -55,6 +55,8 @@ public class Obstacle : MonoBehaviour, IAttachable
 
     private void AttachJointToRigidbody(Rigidbody2D rigidbody)
     {
+        rigidbody2.bodyType = RigidbodyType2D.Dynamic;
+
         RelativeJoint2D relativeJoint2D = gameObject.AddComponent<RelativeJoint2D>();
         relativeJoint2D.connectedBody = rigidbody;
         relativeJoint2DList.Add(relativeJoint2D);
@@ -67,6 +69,7 @@ public class Obstacle : MonoBehaviour, IAttachable
         go.transform.position = transform.position;
         go.transform.rotation = transform.rotation;
         go.transform.SetParent(composite.transform);
+
         clonedCollider = go.GetComponent<PolygonCollider2D>();
         clonedCollider.pathCount = collider.pathCount;
         clonedCollider.points = collider.points;
@@ -84,9 +87,9 @@ public class Obstacle : MonoBehaviour, IAttachable
         }
 
         if(clonedCollider != null) {
-            HouseManager hm = clonedCollider.GetComponentInParent<HouseManager>();
+            HouseManager houseManager = clonedCollider.GetComponentInParent<HouseManager>();
             Destroy(clonedCollider.gameObject);
-            hm?.Rebuild();
+            houseManager?.Rebuild();
         }
 
 

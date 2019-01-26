@@ -12,10 +12,13 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Material baracksRoomMaterial;
     [SerializeField] private Material scavengerRoomMaterial;
 
-    private void Awake() { houseManager.OnHouseRebuild = UpdateRooms; }
+    private void Awake() {
+        
+        houseManager.OnHouseRebuild = UpdateRooms;
+    }
     private void OnDestroy() { houseManager.OnHouseRebuild = null; }
 
-    Dictionary<string, GameObject> rooms = new Dictionary<string, GameObject>();
+    Dictionary<string, Room> rooms = new Dictionary<string, Room>();
 
     private void UpdateRooms(RoomData[] roomDatas)
     {
@@ -31,12 +34,23 @@ public class RoomGenerator : MonoBehaviour
         {
             if (!rooms.ContainsKey(roomDatas[i].ID))
             {
-                GameObject go = new GameObject("RoomName", typeof(MeshFilter), typeof(MeshRenderer));
+                GameObject go = new GameObject("RoomName", typeof(Room), typeof(MeshFilter), typeof(MeshRenderer));
                 go.GetComponent<MeshFilter>().mesh = roomDatas[i].Mesh;
                 go.GetComponent<MeshRenderer>().material = kitchenMaterial;
-
-                rooms.Add(roomDatas[i].ID, go);
+                Room room = go.GetComponent<Room>();
+                room.OnRoomTypeSelected += OnRoomTypeSelected;
+                rooms.Add(roomDatas[i].ID, room);
             }
+        }
+    }
+
+    private void OnRoomTypeSelected(Room room, RoomTypeSelection roomType)
+    {
+        switch (roomType)
+        {
+            case RoomTypeSelection.Kitchen: room.material = kitchenMaterial; break;
+            case RoomTypeSelection.Barracks: room.material = baracksRoomMaterial; break;
+            case RoomTypeSelection.ScavengerRoom: room.material = scavengerRoomMaterial; break;
         }
     }
 
@@ -49,7 +63,6 @@ public class RoomGenerator : MonoBehaviour
         {
             tmpList.Add(roomDatas[i].ID);
         }
-
 
         foreach (var room in rooms)
         {

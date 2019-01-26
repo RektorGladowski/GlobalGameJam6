@@ -5,13 +5,10 @@ public class Wall : MonoBehaviour, IDamageable
 {
     public StructureConfig wallConfig;
 
-   
     public List<Wall> neighbours = new List<Wall>();
     public Rigidbody2D rigidbody2 { get; private set; }
     public new PolygonCollider2D collider { get; private set; }
     float currentHP;
-
-
 
     void Awake()
     {
@@ -25,8 +22,6 @@ public class Wall : MonoBehaviour, IDamageable
         collider.isTrigger = wallConfig.triggerByDefault;
         currentHP = wallConfig.structureHP;
     }  
-
-
 
     public void Drop()
     {
