@@ -12,10 +12,15 @@ public class PopupManager : MonoBehaviour
     void Awake () => instance = this;
 
     #region Room Creation Popup
-    public void ShowRoomCreationPopup ()
+    public void ShowRoomCreationPopup()
     {
         GetComponentInChildren<IPopup<RoomSelectionPopupSetupData>>()?.OpenPopup(new RoomSelectionPopupSetupData(RoomCreationPopupExit));
     }
+    public void ShowRoomCreationPopup(Action<RoomTypeSelection> callback)
+    {
+        GetComponentInChildren<IPopup<RoomSelectionPopupSetupData>>()?.OpenPopup(new RoomSelectionPopupSetupData(callback));
+    }
+
 
     void RoomCreationPopupExit (RoomTypeSelection rts)
     {
