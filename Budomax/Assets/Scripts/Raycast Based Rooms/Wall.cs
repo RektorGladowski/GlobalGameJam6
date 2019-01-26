@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour, IDamageable, IAttachable
+public class Wall : MonoBehaviour, IDamageable
 {
     public StructureConfig wallConfig;
 
