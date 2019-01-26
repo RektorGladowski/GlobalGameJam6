@@ -6,23 +6,32 @@ public class PopupManager : MonoBehaviour
 {
     public static PopupManager instance;
     public Action<RoomTypeSelection> OnRoomTypeSelected;
+    public Action<EndGamePopupResult> OnEndGameOptionSelected;
 
 
-    void Awake() => instance = this;
+    void Awake () => instance = this;
 
-
-    public void ShowRoomCreationPopup()
+    #region Room Creation Popup
+    public void ShowRoomCreationPopup ()
     {
-        GetComponentInChildren<IPopup<RoomTypeSelection>>().OpenPopup(RoomCreationPopupExit);
+        GetComponentInChildren<IPopup<RoomSelectionPopupSetupData>>()?.OpenPopup(new RoomSelectionPopupSetupData(RoomCreationPopupExit));
     }
 
-    public void ShowRoomCreationPopup(Action<RoomTypeSelection> callback)
-    {
-        GetComponentInChildren<IPopup<RoomTypeSelection>>().OpenPopup(callback);
-    }
-
-    void RoomCreationPopupExit(RoomTypeSelection rts)
+    void RoomCreationPopupExit (RoomTypeSelection rts)
     {
         OnRoomTypeSelected?.Invoke(rts);
     }
+    #endregion
+
+    #region End Game Popup
+    public void ShowEndGamePopup (EndGamePopupData data)
+    {
+        GetComponentInChildren<IPopup<EndGamePopupSetupData>>()?.OpenPopup(new EndGamePopupSetupData(data, EndGamePopupExit));
+    }
+
+    void EndGamePopupExit (EndGamePopupResult egpr)
+    {
+        OnEndGameOptionSelected?.Invoke(egpr);
+    }
+    #endregion
 }

@@ -2,16 +2,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomSelectionPopup : MonoBehaviour, IPopup<RoomTypeSelection>
+public class RoomSelectionPopup : MonoBehaviour, IPopup<RoomSelectionPopupSetupData>
 {
     public GameObject PopupPanel;
     public Button kitchenButton, scavButton, barracksButton;
 
     Action<RoomTypeSelection> managerCallback;
 
-    public void OpenPopup(Action<RoomTypeSelection> callback)
+    public void OpenPopup(RoomSelectionPopupSetupData data)
     {
-        managerCallback = callback;
+        managerCallback = data.callback;
         SetPanelInteractability(true);
     }
 
