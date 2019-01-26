@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public class Room : MonoBehaviour, IRoom
+public class Room : MonoBehaviour
 {
     public Action<Room, RoomTypeSelection> OnRoomTypeSelected;
     public RoomTypeSelection roomType;
