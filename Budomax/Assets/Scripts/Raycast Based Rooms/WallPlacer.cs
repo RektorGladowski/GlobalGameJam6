@@ -61,7 +61,7 @@ public class WallPlacer : MonoBehaviour
 
     bool CanBePlacedHere()
     {
-        return (3 > attachablesInRange.Count && attachablesInRange.Count > 0) && restictedAreasInRange.Count == 0;
+        return (attachablesInRange.Count > 0) && restictedAreasInRange.Count == 0;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

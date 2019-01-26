@@ -25,10 +25,20 @@ public class WallRoomChecker : MonoBehaviour
         wallCollider.Raycast(transform.right, contactFilter, upResults);
         wallCollider.Raycast(-transform.right, contactFilter, downResults);
 
-        if (upResults[0].collider != null) roomCheckPoint = (Vector2)transform.position + (upResults[0].point - (Vector2)transform.position) / 2f;
-        else if (downResults[0].collider != null) roomCheckPoint = (Vector2)transform.position + (downResults[0].point - (Vector2)transform.position) / 2f;
-        else return;
+        if (upResults[0].collider != null)
+        {
+            roomCheckPoint = (Vector2)transform.position + (upResults[0].point - (Vector2)transform.position) / 2f;
+            CheckForRoomAtPoint(roomCheckPoint);
+        }
+        if (downResults[0].collider != null)
+        {
+            roomCheckPoint = (Vector2)transform.position + (downResults[0].point - (Vector2)transform.position) / 2f;
+            CheckForRoomAtPoint(roomCheckPoint);
+        }
+    }
 
+    void CheckForRoomAtPoint(Vector3 point)
+    {
         Debug.Log("Another wall has been detected");
         float additionAngle = 2 * Mathf.PI / raycastChecks;
         RaycastHit2D recentHit;
@@ -60,6 +70,7 @@ public class WallRoomChecker : MonoBehaviour
             Debug.Log("Real room has been detected");
         }
     }
+
 
 
     // DEBUG
