@@ -20,7 +20,7 @@ public class EndGamePopup : MonoBehaviour, IPopup<EndGamePopupSetupData>
         if (setupData.data.hasPlayerWon) FailInfo.SetActive(false);
         else WinInfo.SetActive(false);
 
-        scoreText.text = setupData.data.totalScore.ToString();
+        scoreText.text = "Total Score: " + setupData.data.totalScore.ToString();
     }
 
     public void OnRestartButtonPressed ()
