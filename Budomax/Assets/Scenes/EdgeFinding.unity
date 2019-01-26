@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 811669958}
   - component: {fileID: 811669960}
   - component: {fileID: 811669959}
+  - component: {fileID: 811669961}
   m_Layer: 0
   m_Name: ColliderHolder
   m_TagString: Untagged
@@ -452,6 +453,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &811669961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811669956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9628f73c9f4ac439ebb293261ea3ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kitchenMaterial: {fileID: 2100000, guid: 9d007dca83539034fa9fe6445a00e7a5, type: 2}
+  baracksRoomMaterial: {fileID: 2100000, guid: 14c4231705e319e4490371fa31fc817a, type: 2}
+  scavengerRoomMaterial: {fileID: 2100000, guid: 7dc849375db31754fbc07ab3018d8a71,
+    type: 2}
 --- !u!1 &1224344692
 GameObject:
   m_ObjectHideFlags: 0

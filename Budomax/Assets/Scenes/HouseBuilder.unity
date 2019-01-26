@@ -318,7 +318,6 @@ GameObject:
   - component: {fileID: 1805350058}
   - component: {fileID: 1805350057}
   - component: {fileID: 1805350056}
-  - component: {fileID: 1805350055}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -326,21 +325,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1805350055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805350054}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe850e931c63f1742b29bfca17bc6b69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 6864949152639518997, guid: be969f15f8cf8284db910c7d11a62970,
-    type: 3}
-  rotationSpeed: 120
 --- !u!81 &1805350056
 AudioListener:
   m_ObjectHideFlags: 0
