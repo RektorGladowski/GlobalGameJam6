@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using PolygonArea;
+using System;
 
 [RequireComponent(typeof(CompositeCollider2D))]
 public class HouseManager : MonoBehaviour
 {
+    public Action<RoomData[]> OnHouseRebuild;
+
     // Read all the colliders and create a combined Polygon2D collider from the others. See PolygonCollider2D in the docs, specifically pathCount and SetPath. 
     public static HouseManager instance;
 
@@ -12,8 +15,6 @@ public class HouseManager : MonoBehaviour
     private CompositeCollider2D _compositeCollider;
 
     private RoomData outerWalls;
-
-
     private List<RoomData> roomDatas = new List<RoomData>();
 
     // Rather unnecessary ;)
@@ -35,15 +36,8 @@ public class HouseManager : MonoBehaviour
         }
     }
 
-    public bool IsTouching(Collider2D collider2d)
-    {
-        return compositeCollider.IsTouching(collider2d);
-    }
-
-    public RoomData[] GetRooms()
-    {
-        return roomDatas.ToArray();
-    }
+    public bool IsTouching(Collider2D collider2d) { return compositeCollider.IsTouching(collider2d); }
+    public RoomData[] GetRooms() { return roomDatas.ToArray(); }
 
 }
 
@@ -52,11 +46,13 @@ public class RoomData
 {
     public Vector2[] Points { get; private set; }
     public float Area { get; private set; }
+    public Mesh Mesh { get; private set; }
 
     public RoomData(Vector2[] points)
     {
         Points = points;
         Area = points.Area();
+        Mesh = MeshGenerator.GenerateMesh(Points);
     }
 
 }
