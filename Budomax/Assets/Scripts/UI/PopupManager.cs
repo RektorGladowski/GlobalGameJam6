@@ -8,7 +8,6 @@ public class PopupManager : MonoBehaviour
     public Action<RoomTypeSelection> OnRoomTypeSelected;
     public Action<EndGamePopupResult> OnEndGameOptionSelected;
 
-
     void Awake () => instance = this;
 
     #region Room Creation Popup
