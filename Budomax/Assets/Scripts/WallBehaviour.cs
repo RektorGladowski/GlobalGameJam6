@@ -9,21 +9,34 @@ public class WallBehaviour : MonoBehaviour
 
     WallInteractionMode interactionMode;
     Rigidbody2D wallRb;
+    Collider2D wallCollider;
     Vector3 mouseOffset;
 
 
     void Awake()
     {
         wallRb = GetComponent<Rigidbody2D>();
+        wallCollider = GetComponent<Collider2D>();
+
         wallRb.bodyType = RigidbodyType2D.Kinematic;
         wallRb.gravityScale = gravityScale;
-
         interactionMode = WallInteractionMode.Targetable;
     }
 
     void LateUpdate()
     {
         ProcessRotation();   
+    }
+
+    void ProcessRotation()
+    {
+        if (interactionMode == WallInteractionMode.Draggable)
+        {
+            if (Input.GetKey(KeyCode.Q))
+                transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime); // Rotate left
+            else if (Input.GetKey(KeyCode.E))
+                transform.Rotate(Vector3.forward * -rotationSpeed * Time.deltaTime); // Rotate right
+        }
     }
 
 
@@ -42,8 +55,7 @@ public class WallBehaviour : MonoBehaviour
         if (interactionMode == WallInteractionMode.Draggable)
         {
             interactionMode = WallInteractionMode.NotTargetable;
-
-            wallRb.bodyType = RigidbodyType2D.Dynamic;
+            DecideWhatToDoWithTheWall();           
         }       
     }
 
@@ -56,14 +68,19 @@ public class WallBehaviour : MonoBehaviour
     }
 
 
-    void ProcessRotation ()
+    void DecideWhatToDoWithTheWall ()
     {
-        if (interactionMode == WallInteractionMode.Draggable)
+        if (HouseManager.instance.IsTouching(wallCollider))
         {
-            if (Input.GetKey(KeyCode.Q))
-                transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime); // Rotate left
-            else if (Input.GetKey(KeyCode.E))
-                transform.Rotate(Vector3.forward * -rotationSpeed * Time.deltaTime); // Rotate right
+            transform.SetParent(HouseManager.instance.transform);
+            wallCollider.usedByComposite = true;
+
+            HouseManager.instance.Rebuild();
+        }
+        else
+        {
+            wallCollider.isTrigger = true;
+            wallRb.bodyType = RigidbodyType2D.Dynamic;
         }
     }
 
