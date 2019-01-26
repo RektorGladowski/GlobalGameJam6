@@ -26,6 +26,8 @@ public class Interactable : MonoBehaviour
 
     public void OnMouseDown()
     {
+        Debug.Log("OnMouseDown");
+
         if (interactionMode == WallInteractionMode.Targetable)
         {
             interactionMode = WallInteractionMode.Draggable;
@@ -49,7 +51,7 @@ public class Interactable : MonoBehaviour
         {
             interactionMode = WallInteractionMode.NotTargetable;
             IAttachable attachable = GetComponent<IAttachable>();
-            attachable?.TryAttaching();
+            if (attachable != null && !attachable.TryAttaching()) attachable.Drop();
         }
     }
 

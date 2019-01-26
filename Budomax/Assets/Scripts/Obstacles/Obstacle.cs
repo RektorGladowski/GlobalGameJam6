@@ -78,6 +78,11 @@ public class Obstacle : MonoBehaviour, IAttachable
         rigidbody2.bodyType = RigidbodyType2D.Dynamic;
         collider.isTrigger = true;
 
+        for (int i = 0; i < relativeJoint2DList.Count; i++)
+        {
+            Destroy(relativeJoint2DList[i]);
+        }
+
         if(clonedCollider != null) {
             HouseManager hm = clonedCollider.GetComponentInParent<HouseManager>();
             Destroy(clonedCollider.gameObject);
