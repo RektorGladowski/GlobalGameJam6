@@ -20,6 +20,7 @@ public class WallBehaviour : MonoBehaviour
 
         wallRb.bodyType = RigidbodyType2D.Kinematic;
         wallRb.gravityScale = gravityScale;
+        wallCollider.isTrigger = true;
         interactionMode = WallInteractionMode.Targetable;
     }
 
@@ -72,9 +73,10 @@ public class WallBehaviour : MonoBehaviour
     {
         if (HouseManager.instance.IsTouching(wallCollider))
         {
+            Destroy(wallRb);
             transform.SetParent(HouseManager.instance.transform);
             wallCollider.usedByComposite = true;
-
+            wallCollider.isTrigger = false;
             HouseManager.instance.Rebuild();
         }
         else

@@ -32,7 +32,11 @@ public class HouseManager : MonoBehaviour
             RoomData roomData = new RoomData(points);
 
             if (outerWalls.Area < roomData.Area) outerWalls = roomData;
-            else roomDatas.Add(roomData);
+            else
+            {
+                roomDatas.Add(roomData);
+                Debug.Log(roomData.Area);
+            }
         }
     }
 
@@ -41,7 +45,7 @@ public class HouseManager : MonoBehaviour
 
 }
 
-
+[System.Serializable]
 public class RoomData
 {
     public Vector2[] Points { get; private set; }
