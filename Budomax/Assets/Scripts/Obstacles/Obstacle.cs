@@ -88,7 +88,7 @@ public class Obstacle : MonoBehaviour, IAttachable
         clonedCollider.usedByComposite = true;
     }
 
-    public void Drop()
+    public virtual void Drop()
     {
         rigidbody2.bodyType = RigidbodyType2D.Dynamic;
         collider.isTrigger = true;
