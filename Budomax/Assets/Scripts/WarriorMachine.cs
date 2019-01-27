@@ -101,7 +101,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
 
     GameObject NearbyEnemy()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(Position, FIRE_RANGE);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(Position, FIRE_RANGE * 10);
 
         GameObject bestEnemy = null;
         float bestDistance = Mathf.Infinity;
@@ -127,11 +127,11 @@ public class WarriorMachine : MonoBehaviour, IDamageable
     void Patrol_FixedUpdate()
     {
         // Check hunger
-        if (satiation == 0)
-        {
-            fsm.ChangeState(WarriorStates.WannaEat);
-            return;
-        }
+        //if (satiation == 0)
+        //{
+        //    fsm.ChangeState(WarriorStates.WannaEat);
+        //    return;
+        //}
 
         // Find best turret
         ITurret bestTurret = null;
@@ -159,7 +159,23 @@ public class WarriorMachine : MonoBehaviour, IDamageable
             Reserve(bestTurret);
         }
 
-        if (reservedTurret == null) { return; }
+        if (reservedTurret == null)
+        {
+            targetEnemy = NearbyEnemy();
+
+            if (targetEnemy == null) { return; }
+
+            Debug.Log("TARGET " + targetEnemy.transform.position);
+            Move(targetEnemy.transform.position);
+
+            float distance = ((Vector2)targetEnemy.transform.position - Position).magnitude;
+            if (distance > USE_RADIUS) { return; }
+
+            var dmg = targetEnemy.GetComponent<IEnemy>();
+            dmg?.Damage(DAMAGE);
+
+            return;
+        }
 
         // Walk
         Move(reservedTurret.Position);
