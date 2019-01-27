@@ -109,8 +109,12 @@ public class Obstacle : MonoBehaviour, IAttachable
 
     public void Damage(float damage)
     {
+        am.playAudio("BuildingDamage", 0.1f);
         health -= damage;
-        if (health <= 0) Drop();
+        if (health <= 0)
+        {
+            Drop();
+        }
     }
 }
 
