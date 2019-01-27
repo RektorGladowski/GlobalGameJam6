@@ -113,7 +113,7 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
 
     public Obstacle FindTile()
     {
-        float distance = Vector2.Distance(transform.position, HouseManager.instance.GetHouseCenterPoint());
+        float distance = 10000f;
         Vector3 direction = HouseManager.instance.GetHouseCenterPoint() - transform.position;
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, direction.normalized, distance, UnityConstants.Layers.HouseWallMask);
         Debug.DrawLine(transform.position, raycastHit.point);  
