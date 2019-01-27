@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
         canSpawn = true;
         currentTime = Time.time;
 
+
         if(TutorialManager.instance != null)
         {
             if (TutorialManager.instance.IsRunning())
@@ -46,15 +47,11 @@ public class EnemySpawner : MonoBehaviour
         cooldown = baseMonsters - 5 * (Time.time / baseMonsters);
         cooldown = Mathf.Max(cooldown, 5);
 
-        Debug.Log(cooldown);
-
         if (Time.time - lastSpawnTime > cooldown && canSpawn)
         {
             SpawnEnemy();
         }
-
     }
-
 
     private void SpawnEnemy()
     {
@@ -66,6 +63,7 @@ public class EnemySpawner : MonoBehaviour
     {
         var randomPoint = UnityEngine.Random.onUnitSphere * HouseManager.instance.GetHouseMaxDistance();
         randomPoint.y = Mathf.Abs(randomPoint.y); // force top.y = Mathf.Abs(P.y);
+        randomPoint.z = 0;
         return randomPoint + HouseManager.instance.GetHouseCenterPoint();
     }
 

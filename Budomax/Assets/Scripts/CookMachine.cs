@@ -25,7 +25,7 @@ public class CookMachine : MonoBehaviour
     void Awake()
     {
         am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        home = HomeObject.GetComponent<IHome>();
+        home = HouseManager.instance?.GetComponent<IHome>();// ?? HomeObject.GetComponent<IHome>();
         fsm = StateMachine<States>.Initialize(this);
         rb = gameObject.GetComponent<Rigidbody2D>();
         if (rb == null)
