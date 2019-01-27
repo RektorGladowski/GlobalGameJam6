@@ -7,9 +7,9 @@ namespace State
     {
         Vector2 Position { get; }
 
-        Building Type { get; }
+        RoomTypeSelection Type { get; }
 
-        IEnumerable<IWall> Walls { get; }
+        //IEnumerable<IWall> Walls { get; }
 
         int MaxWorkers { get; } // Capacity
 
@@ -21,10 +21,10 @@ namespace State
     }
 }
 
-public enum Building
-{
-    Construction,
-    Barracks,
-    Kitchen,
-    Wasteland,
-}
+//public enum Building
+//{
+//    Construction,
+//    Barracks,
+//    Kitchen,
+//    Wasteland,
+//}

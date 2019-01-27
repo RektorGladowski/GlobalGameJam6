@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using State;
 
-public class Kitchen : MonoBehaviour, IRoom
+public class RoomBehaviour : MonoBehaviour, IRoom
 {
     void Awake()
     {
@@ -15,11 +15,11 @@ public class Kitchen : MonoBehaviour, IRoom
     public List<GameObject> WallObjects;
 
     // For the editor
-    public Building type;
+    public RoomTypeSelection type;
 
-    public Building Type { get => type; set { type = value; } }
+    public RoomTypeSelection Type { get => type; set { type = value; } }
 
-    public IEnumerable<IWall> Walls => throw new System.NotImplementedException();
+    //public IEnumerable<IWall> Walls => throw new System.NotImplementedException();
 
     public int MaxWorkers { get; set; }
 

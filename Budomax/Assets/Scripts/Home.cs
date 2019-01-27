@@ -16,7 +16,7 @@ public class Home : MonoBehaviour, IHome
             List<IRoom> rooms = new List<IRoom>();
             foreach (var obj in RoomObjects)
             {
-                IRoom room = obj.GetComponent<Kitchen>();
+                IRoom room = obj.GetComponent<IRoom>();
                 if (room != null)
                 {
                     rooms.Add(room);
