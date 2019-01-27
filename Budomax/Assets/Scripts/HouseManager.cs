@@ -39,7 +39,10 @@ public class HouseManager : MonoBehaviour
             }
         }
 
-        UIManager.instance.UpdateTotalHeight(GetHeight(outerWalls));
+        if (outerWalls != null && UIManager.instance)
+        {
+            UIManager.instance.UpdateTotalHeight(GetHeight(outerWalls));
+        }
 
         OnHouseRebuild?.Invoke(roomDatas.ToArray());
     }
