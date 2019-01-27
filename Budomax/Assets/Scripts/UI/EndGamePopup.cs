@@ -23,10 +23,17 @@ public class EndGamePopup : MonoBehaviour, IPopup<EndGamePopupSetupData>
         scoreText.text = "Total Score: " + setupData.data.totalScore.ToString();
     }
 
+    public void ClosePopupManually()
+    {
+        Debug.LogWarning("Closing end game popup manually is not implemented");
+    }
+
+
+
     public void OnRestartButtonPressed ()
     {
         SetPanelInteractability(false);
-        managerCallback(EndGamePopupResult.RestartGame);
+        managerCallback?.Invoke(EndGamePopupResult.RestartGame);
     }
 
     void SetPanelInteractability(bool interactable)

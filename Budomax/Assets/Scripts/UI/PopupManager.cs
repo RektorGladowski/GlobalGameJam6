@@ -7,26 +7,20 @@ public class PopupManager : MonoBehaviour
     public static PopupManager instance;
     public Action<RoomTypeSelection> OnRoomTypeSelected;
     public Action<EndGamePopupResult> OnEndGameOptionSelected;
+    public Action<EscapePanelSelection> OnEscapePanelOptionSelected;
 
-    TutorialPopup tpManager;
-
-    void Awake()
-    {
-        instance = this;
-        tpManager = GetComponentInChildren<TutorialPopup>();
-        tpManager?.SetupTutorialPopups();
-    }
+    void Awake() => instance = this;
 
     #region Room Creation Popup
     public void ShowRoomCreationPopup()
     {
         GetComponentInChildren<IPopup<RoomSelectionPopupSetupData>>()?.OpenPopup(new RoomSelectionPopupSetupData(RoomCreationPopupExit));
     }
+
     public void ShowRoomCreationPopup(Action<RoomTypeSelection> callback)
     {
         GetComponentInChildren<IPopup<RoomSelectionPopupSetupData>>()?.OpenPopup(new RoomSelectionPopupSetupData(callback));
     }
-
 
     void RoomCreationPopupExit (RoomTypeSelection rts)
     {
@@ -49,12 +43,29 @@ public class PopupManager : MonoBehaviour
     #region Tutorial popups
     public void ShowTutorialMessage (string msg)
     {
-        tpManager?.ShowMessage(msg);
+        GetComponentInChildren<IPopup<QueueableMessage>>()?.OpenPopup(new QueueableMessage(msg));
     }
 
     public void HidePreviousTutorialMessage ()
     {
-        tpManager?.HidePreviousMessage();
+        GetComponentInChildren<IPopup<QueueableMessage>>()?.ClosePopupManually();
+    }
+    #endregion
+
+    #region Escape Panel Popup
+    public void ShowEscapePanel ()
+    {
+        GetComponentInChildren<IPopup<EscapePanelPopupSetupData>>()?.OpenPopup(new EscapePanelPopupSetupData(EscapePanelButtonExit));
+    }
+
+    public void CloseEscapePanel ()
+    {
+        GetComponentInChildren<IPopup<EscapePanelPopupSetupData>>()?.ClosePopupManually();
+    }
+
+    void EscapePanelButtonExit (EscapePanelSelection eps)
+    {
+        OnEscapePanelOptionSelected?.Invoke(eps);
     }
     #endregion
 }
