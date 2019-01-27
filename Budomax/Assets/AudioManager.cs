@@ -5,47 +5,54 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioClip BuildingOneWall;
-      //RecieveDamage
-//BuildingOneWall
-//BuildingRoom
-//Eating
-//EnemyFlyingSpawn
-//GenericClick
-//UnitDeath
-//EnemyDeath
-//EnemyShot
-//WarriorShot
-//BuildingDamage
-//RestockFeeder
-//BuildRoom-Barracks
-//BuildRoom-Kitchen
-//BuildRoom-Scav
-//UnitAppears
-//UnitGoodbyeWarrior
-//UnitGoodbyeCook
-//UnitGoodbyeScav
-// Start is called before the first frame update
+    public AudioClip AmbientGroundLevel;
+    public AudioClip AmbientSpaceLevel;
+    public AudioClip AmbientCloudsLevel;
+    public AudioClip AmbientBattle;
+    bool SpaceIsPlaying;
+    
+    // Start is called before the first frame update
     void Start()
     {
-
-        //  int buildingonewallID = EazySoundManager.PlaySound(BuildingOneWall);
-      //  playAudio("BuildOneWall");
+        SpaceIsPlaying = false;
+        AmbientGroundLevel = Resources.Load<AudioClip>("Sounds/AmbientGroundLevel");
+        AmbientCloudsLevel = Resources.Load<AudioClip>("Sounds/AmbientCloudsLevel");
+        AmbientSpaceLevel = Resources.Load<AudioClip>("Sounds/AmbientSpaceLevel");
+        AmbientBattle = Resources.Load<AudioClip>("Sounds/AmbientBattle");  
     }
 
    public void playAudio(string filename, float volume)
     {
-      Debug.Log("\"Sounds/" + filename + "\"");
       string adress = "Sounds/" + filename;
       var clip = Resources.Load<AudioClip>(adress);
       int clipID = EazySoundManager.PlaySound(clip,volume);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       swapBGMusic();
     }
 
+    void swapBGMusic()
+    {
+        float CamPos = Camera.main.transform.position.y;
+   
+        if (CamPos > 50 && SpaceIsPlaying)
+        {
+            EazySoundManager.PlayMusic(AmbientSpaceLevel, 1.0f, true, true, 2, 3);
+            SpaceIsPlaying = false;
+
+        }
+        else if (CamPos < 50 && !SpaceIsPlaying)
+        {
+            
+            EazySoundManager.PlayMusic(AmbientGroundLevel, 1.0f, true, true, 2, 3);
+            SpaceIsPlaying = true;
+        }
+
+
+    }
   
 }

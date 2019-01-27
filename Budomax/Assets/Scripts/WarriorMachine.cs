@@ -298,7 +298,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
 
             // Fire
             // TODO: Hide warrior, rotate turret
-            am.playAudio("WarriorShot", 0.3f);
+            am.playAudio("TurretShot", 0.3f);
             var dmg = targetEnemy.GetComponent<IDamageable>();
             dmg?.Damage(DAMAGE);
 
