@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Hellmade.Sound;
 
 [RequireComponent(typeof(PolygonCollider2D), typeof(Rigidbody2D), typeof(Interactable))]
+
 public class Obstacle : MonoBehaviour, IAttachable
 {
     public new PolygonCollider2D collider { get { if (_collider == null) _collider = GetComponent<PolygonCollider2D>(); return _collider; } }
@@ -11,8 +13,15 @@ public class Obstacle : MonoBehaviour, IAttachable
     private Rigidbody2D _rigidbody;
 
     private PolygonCollider2D clonedCollider;
+    public AudioManager am;
 
     List<RelativeJoint2D> relativeJoint2DList = new List<RelativeJoint2D>();
+
+
+    void Start()
+    {
+       am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    }
 
     public bool isAttached
     {
@@ -55,11 +64,14 @@ public class Obstacle : MonoBehaviour, IAttachable
 
     private void AttachJointToRigidbody(Rigidbody2D rigidbody)
     {
+        am.playAudio("BuildOneWall", 0.3f);
+
         rigidbody2.bodyType = RigidbodyType2D.Dynamic;
 
         RelativeJoint2D relativeJoint2D = gameObject.AddComponent<RelativeJoint2D>();
         relativeJoint2D.connectedBody = rigidbody;
         relativeJoint2DList.Add(relativeJoint2D);
+       
     }
 
     private void CloneColliderAndAttach(CompositeCollider2D composite)

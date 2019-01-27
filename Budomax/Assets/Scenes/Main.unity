@@ -732,6 +732,7 @@ MonoBehaviour:
   range: 112
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!1 &304402161
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351424984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 65, z: 0}
+  m_LocalPosition: {x: 0, y: 73.8, z: 0}
   m_LocalScale: {x: 1.6615143, y: 1.6615143, z: 1.6615143}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1128,6 +1129,75 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &451381179
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1891334866046314138, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 150.32364
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 301.68094
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.3961911
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891334866046314132, guid: 9db794c4baee1db4ab52ee9a8e60cb94,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9db794c4baee1db4ab52ee9a8e60cb94, type: 3}
 --- !u!1 &454919770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,6 +1470,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!212 &481007115
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2036,6 +2107,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!212 &698046801
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2557,6 +2629,7 @@ MonoBehaviour:
   range: 100
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!1 &842995533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,6 +2678,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!212 &842995536
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3295,6 +3369,7 @@ MonoBehaviour:
   range: 90
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!1 &1026307024
 GameObject:
   m_ObjectHideFlags: 0
@@ -3422,6 +3497,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!212 &1066831239
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4110,6 +4186,7 @@ MonoBehaviour:
   range: 200
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!95 &1345910279
 Animator:
   serializedVersion: 3
@@ -4297,6 +4374,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!212 &1366279956
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4394,6 +4472,7 @@ MonoBehaviour:
   range: 100
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!1001 &1388597820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5063,7 +5142,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.73, y: 5.1}
+  m_Size: {x: 9.73, y: 3.75}
   m_EdgeRadius: 0
 --- !u!4 &1519874573
 Transform:
@@ -5846,6 +5925,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!212 &1935074391
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6438,19 +6518,19 @@ CompositeCollider2D:
   - m_Collider: {fileID: 1519874571}
     m_ColliderPaths:
     - - X: 59350000
-        Y: 119700000
+        Y: 112950000
       - X: -37949996
-        Y: 119700000
+        Y: 112950000
       - X: -37949996
-        Y: 68700000
+        Y: 75450000
       - X: 59350000
-        Y: 68700000
+        Y: 75450000
   m_CompositePaths:
     m_Paths:
-    - - {x: 5.935, y: 11.97}
-      - {x: -3.7949996, y: 11.97}
-      - {x: -3.7949996, y: 6.87}
-      - {x: 5.935, y: 6.87}
+    - - {x: 5.935, y: 11.295}
+      - {x: -3.7949996, y: 11.295}
+      - {x: -3.7949996, y: 7.545}
+      - {x: 5.935, y: 7.545}
   m_VertexDistance: 0.0005
 --- !u!50 &2099662261
 Rigidbody2D:
@@ -6533,9 +6613,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.01
-  range: 60
+  range: 15
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!212 &2100944133
 SpriteRenderer:
   m_ObjectHideFlags: 0
