@@ -24,7 +24,7 @@ public class HorizontalMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Vector3.Distance(startPos, transform.position).ToString());
+        //Debug.Log(Vector3.Distance(startPos, transform.position).ToString());
         transform.Translate(direction);
         if (bounce)
         {
@@ -33,10 +33,8 @@ public class HorizontalMovement : MonoBehaviour
             {
                 direction = direction *-1;
                 distance = 0;
-          
             }
                
         }
-
     }
 }

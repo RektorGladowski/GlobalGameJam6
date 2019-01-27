@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using State;
 
-public class Pantry : MonoBehaviour, IPantry
+public class Turret : MonoBehaviour, ITurret
 {
     void Start()
     {
-        food = 0;
+        isEmpty = false;
         health = MaxHealth;
     }
 
-    bool isDestroyed;
-
+    [SerializeField]
+    bool isEmpty;
     [SerializeField]
     int health;
 
@@ -22,21 +22,16 @@ public class Pantry : MonoBehaviour, IPantry
 
     public Vector2 Position => gameObject.transform.position;
 
-    public int MaxFood => 100;
+    public bool IsEmpty { get => isEmpty; private set { isEmpty = value; } }
 
-    [SerializeField]
-    int food;
-
-    public int Food { get => food; private set { food = value; } }
-
-    public void Eat(int amount)
+    public void Enter()
     {
-        Food -= Mathf.Min(Food, amount);
+        IsEmpty = false;
     }
 
-    public void Fill(int amount)
+    public void Leave()
     {
-        Food += Mathf.Min(MaxFood - Food, amount);
+        IsEmpty = true;
     }
 
     public void Damage(int damage)
