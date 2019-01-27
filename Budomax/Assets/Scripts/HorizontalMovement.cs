@@ -33,7 +33,7 @@ public class HorizontalMovement : MonoBehaviour
             {
                 direction = direction *-1;
                 distance = 0;
-          
+                transform.localScale *= -1;          
             }
                
         }
