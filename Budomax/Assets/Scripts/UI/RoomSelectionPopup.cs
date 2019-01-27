@@ -15,6 +15,13 @@ public class RoomSelectionPopup : MonoBehaviour, IPopup<RoomSelectionPopupSetupD
         SetPanelInteractability(true);
     }
 
+    public void ClosePopupManually()
+    {
+        Debug.LogWarning("Closing room selection popup manually is not implemented");
+    }
+
+
+
     public void OnKitchenButtonPressed ()
     {
         SetPanelInteractability(false);

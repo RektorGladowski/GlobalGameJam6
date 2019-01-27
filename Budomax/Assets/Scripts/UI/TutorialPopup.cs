@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialPopup : MonoBehaviour
+public class TutorialPopup : MonoBehaviour, IPopup<QueueableMessage>
 {
     // Constants
     const float Popup_Max_Teleport_Gap = 0.35f;
@@ -34,7 +34,7 @@ public class TutorialPopup : MonoBehaviour
 
 
     #region Setting up
-    public void SetupTutorialPopups ()
+    void Awake ()
     {
         // Change position of the popup and deactivate its object
         popupRT.anchoredPosition = new Vector2(-Screen.width, 0f);
@@ -107,24 +107,21 @@ public class TutorialPopup : MonoBehaviour
     #endregion
 
     #region Managing Queue
-    public void ShowMessage (string message)
+    public void OpenPopup (QueueableMessage msg)
     {
-        QueueableMessage qMessage = new QueueableMessage(message);
-
         if (IsTheQueueEmpty())
         {
-            messagesToDisplay.Enqueue(qMessage);
+            messagesToDisplay.Enqueue(msg);
             StartShowingQueueableMessage();
         }
         else
         {
-            messagesToDisplay.Enqueue(qMessage);
+            messagesToDisplay.Enqueue(msg);
         }
     }
 
-    public void HidePreviousMessage ()
-    {
-        // Hide message
+    public void ClosePopupManually ()
+    { 
         StartHiding();
     }
 
@@ -148,14 +145,4 @@ public class TutorialPopup : MonoBehaviour
 
     void Update() => MovePopup?.Invoke();
     bool IsTheQueueEmpty() => (messagesToDisplay.Count == 0);
-}
-
-public class QueueableMessage
-{
-    public string messageText;
-
-    public QueueableMessage(string text)
-    { 
-        messageText = text;
-    }
 }
