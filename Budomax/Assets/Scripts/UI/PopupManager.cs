@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PopupManager : MonoBehaviour
@@ -59,18 +58,6 @@ public class PopupManager : MonoBehaviour
     {
         EndGamePopupActive = false;
         OnEndGameOptionSelected?.Invoke(egpr);
-    }
-    #endregion
-
-    #region Tutorial popups
-    public void ShowTutorialMessage (string msg)
-    {
-        GetComponentInChildren<IPopup<QueueableMessage>>()?.OpenPopup(new QueueableMessage(msg));
-    }
-
-    public void HidePreviousTutorialMessage ()
-    {
-        GetComponentInChildren<IPopup<QueueableMessage>>()?.ClosePopupManually();
     }
     #endregion
 
