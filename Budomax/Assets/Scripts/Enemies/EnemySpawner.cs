@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -15,17 +14,21 @@ public class EnemySpawner : MonoBehaviour
 
     private bool canSpawn = false;
 
-    private void Awake()
+    private void Start()
     {
+        canSpawn = true;
         currentTime = Time.time;
 
-        if (TutorialManager.instance.IsRunning())
+        if(TutorialManager.instance != null)
         {
-            TutorialManager.EnemySpawnerReadyToGo += OnEnemySPawnerGo;
-        }
-        else
-        {
-            OnEnemySPawnerGo();
+            if (TutorialManager.instance.IsRunning())
+            {
+                TutorialManager.EnemySpawnerReadyToGo += OnEnemySPawnerGo;
+            }
+            else
+            {
+                OnEnemySPawnerGo();
+            }
         }
     }
 
@@ -43,10 +46,13 @@ public class EnemySpawner : MonoBehaviour
         cooldown = baseMonsters - 5 * (Time.time / baseMonsters);
         cooldown = Mathf.Max(cooldown, 5);
 
-        if(Time.time - lastSpawnTime > cooldown)
+        Debug.Log(cooldown);
+
+        if (Time.time - lastSpawnTime > cooldown && canSpawn)
         {
             SpawnEnemy();
         }
+
     }
 
 
