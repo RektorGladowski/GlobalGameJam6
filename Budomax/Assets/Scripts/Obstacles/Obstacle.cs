@@ -17,6 +17,7 @@ public class Obstacle : MonoBehaviour, IAttachable
 
     List<RelativeJoint2D> relativeJoint2DList = new List<RelativeJoint2D>();
 
+    public float health = 3;
 
     void Start()
     {
@@ -103,6 +104,12 @@ public class Obstacle : MonoBehaviour, IAttachable
             Destroy(clonedCollider.gameObject);
             houseManager?.Rebuild();
         }
+    }
+
+    public void Damage(float damage)
+    {
+        health -= damage;
+        if (health <= 0) Drop();
     }
 }
 
