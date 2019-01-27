@@ -38,12 +38,16 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
     }
 
     void SearchingForObjectToShootTo_Enter()
-    {
-        objectToAttack = FindEnemy();
-        Obstacle obstacle = FindTile();
+    { 
+        if(objectToAttack == null)
+        {
+            objectToAttack = FindEnemy();
+            Obstacle obstacle = FindTile();
 
-        if (objectToAttack == null && obstacle) objectToAttack = obstacle.gameObject;
-        fsm.ChangeState(FlyingEnemyStates.MoveToObject);
+            if (objectToAttack == null && obstacle != null) objectToAttack = obstacle.gameObject;
+            fsm.ChangeState(FlyingEnemyStates.MoveToObject);
+        }
+        
     }
 
     void MoveToObject_Update()
@@ -54,7 +58,7 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
             return;
         }
 
-        rigidbody2D.AddForce(GetDirctionTowardsEnemy() * movementSpeed);
+        rigidbody2D.velocity = GetDirctionTowardsEnemy() * movementSpeed;
         float distance = Vector2.Distance(objectToAttack.transform.position, transform.position);
         if(distance <= distanceToAttack)
         {
@@ -91,8 +95,8 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
         float distance = Vector2.Distance(transform.position, HouseManager.instance.GetHouseCenterPoint());
         Vector3 direction = HouseManager.instance.GetHouseCenterPoint() - transform.position;
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, direction.normalized, distance, UnityConstants.Layers.HouseWallMask);
-        Debug.DrawLine(transform.position, raycastHit.point);
-        if(raycastHit.transform!= null)
+        Debug.DrawLine(transform.position, raycastHit.point);  
+        if (raycastHit.transform!= null)
         {
             return raycastHit.transform.GetComponent<Obstacle>();
         }
