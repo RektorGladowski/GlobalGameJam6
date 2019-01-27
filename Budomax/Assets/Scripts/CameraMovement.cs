@@ -26,7 +26,7 @@ public class CameraMovement : MonoBehaviour
 
         // Set height and constraints
         currentTargetHeight = currentTargetPosition.y;
-        cameraBottomConstraint = currentTargetHeight - 1f;
+        cameraBottomConstraint = currentTargetHeight - 4f;
         cameraTopConstraint = currentTargetHeight + 1f;
         
         // Set borders

@@ -6,8 +6,8 @@ using State;
 public class ScavengerMachine : MonoBehaviour
 {
     const float USE_RADIUS = 0.25f;
-    const int ACTION_TIME = 4;
-    const float MOVEMENT_FORCE = 1f;
+    const int ACTION_TIME = 2;
+    const float MOVEMENT_FORCE = 3f;
     const float FOOD_WEIGHT = 0.5f;
     const float DISTANCE_WEIGHT = 0.5f;
     const float TICK_INTERVAL = 1f;
