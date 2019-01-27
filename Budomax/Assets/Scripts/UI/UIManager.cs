@@ -36,5 +36,10 @@ public class UIManager : MonoBehaviour
         scavsCounter.SetTargetValue(scavs);
         warriorsCounter.SetTargetValue(warriors);
     }
+
+    public void ShowOrderButton ()
+    {
+
+    }
     #endregion
 }
