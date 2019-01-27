@@ -70,22 +70,25 @@ public class RoomGenerator : MonoBehaviour
 
     private void OnRoomTypeSelected(Room room, RoomTypeSelection roomType)
     {
+        var spawnPoint = new Vector3(room.Position.x, room.Position.y, -8);
+        
+
         switch (roomType)
         {
             case RoomTypeSelection.Kitchen:
-                Instantiate(Cook, room.Position, Quaternion.identity);
+                Instantiate(Cook, spawnPoint, Quaternion.identity);
                 TutorialManager.instance.OnKitchenRoomCreated();
                 am.playAudio("AssignRoom-Kitchen", 0.3f);
                 room.material = kitchenMaterial; break;
 
             case RoomTypeSelection.Barracks:
-                Instantiate(Warrior, room.Position, Quaternion.identity);
+                Instantiate(Warrior, spawnPoint, Quaternion.identity);
                 TutorialManager.instance.OnBarracksCreated();
                 am.playAudio("AssignRoom-Warrior", 0.3f);
                 room.material = baracksRoomMaterial; break;
 
             case RoomTypeSelection.ScavengerRoom:
-                Instantiate(Scavenger, room.Position, Quaternion.identity);
+                Instantiate(Scavenger, spawnPoint, Quaternion.identity);
                 TutorialManager.instance.OnScavengerRoomCreated();
                 am.playAudio("AssignRoom-Scav", 0.3f);
                 room.material = scavengerRoomMaterial; break;
