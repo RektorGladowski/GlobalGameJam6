@@ -25,9 +25,9 @@ public class ScavengerMachine : MonoBehaviour
     float timeElapsed;
     GameObject carriedWall;
 
-    void Awake()
+    void Start()
     {
-        home = HomeObject.GetComponent<IHome>();
+        home = HouseManager.instance.GetComponent<IHome>();// ?? HomeObject.GetComponent<IHome>();
         fsm = StateMachine<ScavengerStates>.Initialize(this);
         rb = gameObject.GetComponent<Rigidbody2D>();
         if (rb == null)
@@ -81,7 +81,11 @@ public class ScavengerMachine : MonoBehaviour
     // State transitions
     void WannaRest_FixedUpdate()
     {
-        // Find best kitchen
+        // Hack until there are working rooms
+        fsm.ChangeState(ScavengerStates.WannaScavenge);
+        return;
+
+        // Find best scavenger room
         IRoom bestRoom = null;
         float bestDistance = Mathf.Infinity;
 
@@ -199,7 +203,6 @@ public class ScavengerMachine : MonoBehaviour
         float distance = (scavengeTarget - Position).magnitude;
 
         Move(scavengeTarget);
-
         if (distance > USE_RADIUS) { return; }
 
         fsm.ChangeState(ScavengerStates.Scrapyard);
@@ -217,7 +220,7 @@ public class ScavengerMachine : MonoBehaviour
 
     void WannaReturn_Enter()
     {
-        scavengeTarget = new Vector2(Random.Range(-6f, 1f), 1f);
+        scavengeTarget = new Vector2(Random.Range(-6f, 1f), 0f); // y was 1f
     }
 
     void WannaReturn_FixedUpdate()

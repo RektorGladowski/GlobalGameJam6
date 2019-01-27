@@ -15,6 +15,8 @@ public class WarriorMachine : MonoBehaviour, IDamageable
     const int DAMAGE = 1;
     public AudioManager am;
 
+    public GameObject bullet;
+    public GameObject turretBullet;
     public GameObject HomeObject;
     IHome home; // TODO: Get from some singleton
     Rigidbody2D rb;
@@ -28,11 +30,11 @@ public class WarriorMachine : MonoBehaviour, IDamageable
     GameObject targetEnemy;
     public int Health { get; private set; }
 
-    void Awake()
+    void Start()
     {
         am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         Health = 5;
-        home = HomeObject.GetComponent<IHome>();
+        home = HouseManager.instance.GetComponent<IHome>();// ?? HomeObject.GetComponent<IHome>();
         fsm = StateMachine<WarriorStates>.Initialize(this);
         rb = gameObject.GetComponent<Rigidbody2D>();
         if (rb == null)
