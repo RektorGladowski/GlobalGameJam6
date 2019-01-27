@@ -32,35 +32,39 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
     {
         collider = GetComponent<Collider2D>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         fsm = StateMachine<FlyingEnemyStates>.Initialize(this);
         fsm.ChangeState(FlyingEnemyStates.SearchingForObjectToShootTo);
+        lastShootTime = Time.time;
     }
 
     void SearchingForObjectToShootTo_Enter()
-    { 
-        if(objectToAttack == null)
+    {
+        if (objectToAttack == null)
         {
             objectToAttack = FindEnemy();
             Obstacle obstacle = FindTile();
 
             if (objectToAttack == null && obstacle != null) objectToAttack = obstacle.gameObject;
             fsm.ChangeState(FlyingEnemyStates.MoveToObject);
-        }
+        } 
         
     }
 
     void MoveToObject_Update()
     {
-        if (objectToAttack == null)
+        if (objectToAttack == null) 
         {
             fsm.ChangeState(FlyingEnemyStates.SearchingForObjectToShootTo);
             return;
         }
+        rigidbody2D.AddForce(GetDirctionTowardsEnemy() * movementSpeed);  
+        //Vector2 toPosition = objectToAttack.transform.position - GetDirctionTowardsEnemy() * distanceToAttack;
 
-        rigidbody2D.velocity = GetDirctionTowardsEnemy() * movementSpeed;
+        //transform.position = Vector2.Lerp(transform.position, objectToAttack.transform.position, Time.deltaTime);
         float distance = Vector2.Distance(objectToAttack.transform.position, transform.position);
-        if(distance <= distanceToAttack)
+
+        if (distance <= distanceToAttack)
         {
             fsm.ChangeState(FlyingEnemyStates.Atack);
         }
@@ -68,10 +72,19 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
 
     void Atack_Update()
     {
+        rigidbody2D.velocity = Vector2.zero;
+
         if (objectToAttack == null) fsm.ChangeState(FlyingEnemyStates.SearchingForObjectToShootTo);
-        if(Time.time - lastShootTime >= cooldown)
+
+        if (Time.time - lastShootTime >= cooldown)
         {
             ShootInDirection(GetDirctionTowardsEnemy());
+        }
+        float distance = Vector2.Distance(objectToAttack.transform.position, transform.position);
+
+        if (distance > distanceToAttack)
+        {
+            fsm.ChangeState(FlyingEnemyStates.MoveToObject);
         }
     }
 
@@ -87,7 +100,7 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
 
     private Vector2 GetDirctionTowardsEnemy()
     {
-        return objectToAttack.transform.position - transform.position;
+        return (objectToAttack.transform.position - transform.position).normalized;
     }
 
     public Obstacle FindTile()
