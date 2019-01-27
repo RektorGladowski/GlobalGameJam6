@@ -11,6 +11,8 @@ public class WarriorMachine : MonoBehaviour, IDamageable
     const float FOOD_WEIGHT = 0.5f;
     const float DISTANCE_WEIGHT = 0.5f;
     const float TICK_INTERVAL = 1f;
+    const float FIRE_RANGE = 3f;
+    const int DAMAGE = 1;
 
     public GameObject HomeObject;
     IHome home; // TODO: Get from some singleton
@@ -88,6 +90,30 @@ public class WarriorMachine : MonoBehaviour, IDamageable
         {
             // TODO: Destroy
         }
+    }
+
+    GameObject NearbyEnemy()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(Position, FIRE_RANGE);
+
+        GameObject bestEnemy = null;
+        float bestDistance = Mathf.Infinity;
+
+        foreach (Collider2D col in colliders)
+        {
+            var enemy = col.GetComponent<IEnemy>();
+            if (enemy == null) { continue; }
+
+            float distance = ((Vector2)col.transform.position - Position).magnitude;
+
+            if (bestEnemy == null || distance < bestDistance)
+            {
+                bestEnemy = col.gameObject;//col.GetComponent<IDamageable>();
+                bestDistance = distance;
+            }
+        }
+
+        return bestEnemy;
     }
 
     // State transitions
@@ -251,13 +277,32 @@ public class WarriorMachine : MonoBehaviour, IDamageable
                 yield break;
             }
 
-            // TODO: Look for nearby enemies
-            // ...
+            // Choose target
+            if (targetEnemy == null)
+            {
+                targetEnemy = NearbyEnemy();
+            }
+            else
+            {
+                float distance = ((Vector2)targetEnemy.transform.position - Position).magnitude;
+                if (distance > FIRE_RANGE)
+                {
+                    targetEnemy = NearbyEnemy();
+                }
+            }
+
+            // Fire
+            // TODO: Hide warrior, rotate turret
+            var dmg = targetEnemy.GetComponent<IDamageable>();
+            dmg?.Damage(DAMAGE);
+
+            yield return new WaitForSeconds(ACTION_TIME);
         }
     }
 
     void Turret_Exit()
     {
+        targetEnemy = null;
         CancelReservation();
     }
 }
