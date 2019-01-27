@@ -1,4 +1,5 @@
-﻿using System;
+﻿using State;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,16 @@ public class RoomGenerator : MonoBehaviour
 
     Dictionary<string, Room> rooms = new Dictionary<string, Room>();
 
+    public IRoom[] GetAllRooms()
+    {
+        List<IRoom> rooms = new List<IRoom>();
+        foreach (var item in rooms)
+        {
+            rooms.Add(item);
+        }
+        return rooms.ToArray();
+    }
+
     private void UpdateRooms(RoomData[] roomDatas)
     {
         CreateMissingRooms(roomDatas);
@@ -42,6 +53,8 @@ public class RoomGenerator : MonoBehaviour
                 go.GetComponent<MeshFilter>().mesh = roomDatas[i].Mesh;
                 go.GetComponent<MeshRenderer>().material = kitchenMaterial;
                 Room room = go.GetComponent<Room>();
+                room.roomData = roomDatas[i];
+
                 room.OnRoomTypeSelected += OnRoomTypeSelected;
                 rooms.Add(roomDatas[i].ID, room);
                 am.playAudio("BuildingRoom", 0.3f);
