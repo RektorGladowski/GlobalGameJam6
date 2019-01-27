@@ -8,7 +8,7 @@ public class TutorialManager : MonoBehaviour
     TimerUpdater UpdateTimer = null;
 
     public static TutorialManager instance;
-    public Action EnemySpawnerReadyToGo;
+    public static Action EnemySpawnerReadyToGo;
 
     public List<TutorialStageData> tutorialStages = new List<TutorialStageData>();
     public TutorialPopup popupScript;
@@ -16,14 +16,50 @@ public class TutorialManager : MonoBehaviour
     TutorialStage currentTutorialStage;
     float timer = 0f;
 
+    TutorialCheckState state = TutorialCheckState.Checking;
+
 
     #region Setting up
-    void Awake () => instance = this;
+    public bool IsRunning() => state == TutorialCheckState.Running;
+
+    void Awake()
+    {
+        instance = this;
+        CheckIfTutorialIsNecessary();
+    }
+
+    void CheckIfTutorialIsNecessary()
+    {
+        if (PlayerPrefs.HasKey("tutorialInfo"))
+        {
+            if (PlayerPrefs.GetInt("tutorialInfo") == 0)
+            {
+                PlayerPrefs.SetInt("tutorialInfo", 1);
+                PlayerPrefs.Save();
+
+                state = TutorialCheckState.Running;
+            }
+            else
+            {
+                state = TutorialCheckState.NotRunning;
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("tutorialInfo", 0);
+            PlayerPrefs.Save();
+
+            state = TutorialCheckState.Running;
+        }
+    }
 
     void Start ()
     {
-        SetupPopupScript();
-        StartTutorial();
+        if (state == TutorialCheckState.Running)
+        {
+            SetupPopupScript();
+            StartTutorial();
+        }       
     }
 
     void SetupPopupScript ()
@@ -105,21 +141,24 @@ public class TutorialManager : MonoBehaviour
     #region Updating tutorial
     void UpdateTutorialStage(TutorialStage endedStage)
     {
-        if (endedStage == TutorialStage.UnitsInfo) EnemySpawnerReadyToGo?.Invoke();
-
-        if (endedStage != TutorialStage.DefendHome)
+        if (state == TutorialCheckState.Running)
         {
-            currentTutorialStage = (TutorialStage)((int)endedStage + 1);
-            popupScript?.ShowMessage((int)currentTutorialStage);
+            if (endedStage == TutorialStage.UnitsInfo) EnemySpawnerReadyToGo?.Invoke();
 
-            timer = 0f;
-            if (tutorialStages[(int)currentTutorialStage].stageType == TutorialStageType.Timed) UpdateTimer = Timer;
-            else UpdateTimer = null;
-        }
-        else
-        {
-            popupScript.ClosePopupManually();
-        }
+            if (endedStage != TutorialStage.DefendHome)
+            {
+                currentTutorialStage = (TutorialStage)((int)endedStage + 1);
+                popupScript?.ShowMessage((int)currentTutorialStage);
+
+                timer = 0f;
+                if (tutorialStages[(int)currentTutorialStage].stageType == TutorialStageType.Timed) UpdateTimer = Timer;
+                else UpdateTimer = null;
+            }
+            else
+            {
+                popupScript.ClosePopupManually();
+            }
+        }       
     }
 
     void Timer ()
@@ -137,4 +176,11 @@ public class TutorialManager : MonoBehaviour
         UpdateTimer?.Invoke();
     }
     #endregion
+}
+
+public enum TutorialCheckState
+{
+    Checking,
+    Running,
+    NotRunning,
 }
