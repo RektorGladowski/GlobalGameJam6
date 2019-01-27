@@ -749,6 +749,7 @@ MonoBehaviour:
   range: 20
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!1 &304402161
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +910,50 @@ Transform:
   - {fileID: 1639649892}
   m_Father: {fileID: 1949333435}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &383134865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 383134867}
+  - component: {fileID: 383134866}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &383134866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383134865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a29aaaf2b33593488434bdc6301bbaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildingOneWall: {fileID: 0}
+--- !u!4 &383134867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383134865}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.998734, y: 57.34224, z: 1.3348427}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &423727987
 GameObject:
@@ -1338,6 +1383,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!212 &481007115
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1954,6 +2000,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!212 &698046801
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2475,6 +2522,7 @@ MonoBehaviour:
   range: 20
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!1 &842995533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,6 +2571,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!212 &842995536
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3060,6 +3109,7 @@ MonoBehaviour:
   range: 5
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!1 &996150769
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,6 +3280,7 @@ MonoBehaviour:
   range: 20
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!1 &1066831236
 GameObject:
   m_ObjectHideFlags: 0
@@ -3278,6 +3329,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!212 &1066831239
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3589,47 +3641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f481ea22995504d95c19994af6b343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialStages:
-  - stageType: 1
-    timeToShow: 5
-    stageMessage: Drag and drop a wall to build rooms
-  - stageType: 0
-    timeToShow: 5
-    stageMessage: Rotate walls using Q and E
-  - stageType: 1
-    timeToShow: 5
-    stageMessage: Enclose a room to finish it
-  - stageType: 1
-    timeToShow: 5
-    stageMessage: Select Scavenger Room
-  - stageType: 0
-    timeToShow: 5
-    stageMessage: Scavengers will go out looking for new parts
-  - stageType: 0
-    timeToShow: 3
-    stageMessage: Your units are getting hungry!
-  - stageType: 1
-    timeToShow: 5
-    stageMessage: Build a Kitchen
-  - stageType: 1
-    timeToShow: 5
-    stageMessage: Build a Feeder
-  - stageType: 0
-    timeToShow: 4
-    stageMessage: Cooks will prepare food and stock up the feeders
-  - stageType: 0
-    timeToShow: 4
-    stageMessage: Units go to feeders to eat and restore energy
-  - stageType: 0
-    timeToShow: 3
-    stageMessage: "Look out! It\u2019s an enemy! To arms!"
-  - stageType: 1
-    timeToShow: 5
-    stageMessage: Build Barracks
-  - stageType: 0
-    timeToShow: 3
-    stageMessage: Defend your home!
-  popupScript: {fileID: 1146130101}
 --- !u!1001 &1169839097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4345,6 +4356,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
+  am: {fileID: 0}
 --- !u!212 &1366279956
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5845,6 +5857,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!212 &1935074391
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6703,6 +6716,7 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 0
+  am: {fileID: 0}
 --- !u!212 &2100944133
 SpriteRenderer:
   m_ObjectHideFlags: 0
