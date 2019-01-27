@@ -18,9 +18,9 @@ public class WallPlacer : MonoBehaviour
     {
         if (interactionMode == WallInteractionMode.Draggable)
         {
-            if (Input.GetKey(KeyCode.Q))
+            if (InputManager.GetRotateLeftAction())
                 transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime); // Rotate left
-            else if (Input.GetKey(KeyCode.E))
+            else if (InputManager.GetRotateRightAction())
                 transform.Rotate(Vector3.forward * -rotationSpeed * Time.deltaTime); // Rotate right
         }
     }

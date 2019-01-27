@@ -13,6 +13,19 @@ public class RoomSelectionPopup : MonoBehaviour, IPopup<RoomSelectionPopupSetupD
     {
         managerCallback = data.callback;
         SetPanelInteractability(true);
+
+        switch(data.buttonLocks)
+        {
+            case RoomSelectionButtonLockPreset.KitchenAsOnlyOption:
+                barracksButton.interactable = scavButton.interactable = false;
+                break;
+            case RoomSelectionButtonLockPreset.BarracksAsOnlyOption:
+                kitchenButton.interactable = scavButton.interactable = false;
+                break;
+            case RoomSelectionButtonLockPreset.ScavengerRoomAsOnlyOption:
+                kitchenButton.interactable = barracksButton.interactable = false;
+                break;
+        }
     }
 
     public void ClosePopupManually()
