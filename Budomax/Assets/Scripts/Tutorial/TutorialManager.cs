@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,7 @@ public class TutorialManager : MonoBehaviour
     TimerUpdater UpdateTimer = null;
 
     public static TutorialManager instance;
+    public Action EnemySpawnerReadyToGo;
 
     public List<TutorialStageData> tutorialStages = new List<TutorialStageData>();
     public TutorialPopup popupScript;
@@ -16,12 +17,11 @@ public class TutorialManager : MonoBehaviour
     float timer = 0f;
 
 
-
     #region Setting up
+    void Awake () => instance = this;
+
     void Start ()
     {
-        instance = this;
-
         SetupPopupScript();
         StartTutorial();
     }
@@ -105,6 +105,8 @@ public class TutorialManager : MonoBehaviour
     #region Updating tutorial
     void UpdateTutorialStage(TutorialStage endedStage)
     {
+        if (endedStage == TutorialStage.UnitsInfo) EnemySpawnerReadyToGo?.Invoke();
+
         if (endedStage != TutorialStage.DefendHome)
         {
             currentTutorialStage = (TutorialStage)((int)endedStage + 1);
