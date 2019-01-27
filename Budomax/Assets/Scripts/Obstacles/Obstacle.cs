@@ -91,8 +91,6 @@ public class Obstacle : MonoBehaviour, IAttachable
             Destroy(clonedCollider.gameObject);
             houseManager?.Rebuild();
         }
-
-
     }
 }
 
