@@ -148,14 +148,24 @@ public class CookMachine : MonoBehaviour
         int space = visitedPantry.MaxFood - visitedPantry.Food;
         int filled = Mathf.Min(space, carriedFood);
 
+        yield return new WaitForSeconds(ACTION_TIME);
+
+        if (space == 0)
+        {
+            fsm.ChangeState(States.WannaStock);
+            yield break;
+        }
+
         visitedPantry.Fill(filled);
         carriedFood -= filled;
 
-        yield return new WaitForSeconds(ACTION_TIME);
-
-        visitedPantry = null;
 
         fsm.ChangeState(States.WannaCook);
+    }
+
+    void Pantry_Exit()
+    {
+        visitedPantry = null;
     }
 }
 

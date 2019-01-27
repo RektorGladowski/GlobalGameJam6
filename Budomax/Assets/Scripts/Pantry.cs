@@ -16,9 +16,12 @@ public class Pantry : MonoBehaviour, IPantry
 
     public Vector2 Position => gameObject.transform.position;
 
-    public int MaxFood => 500;
+    public int MaxFood => 100;
 
-    public int Food { get; private set; }
+    [SerializeField]
+    int food;
+
+    public int Food { get => food; private set { food = value; } }
 
     public void Eat(int amount)
     {
