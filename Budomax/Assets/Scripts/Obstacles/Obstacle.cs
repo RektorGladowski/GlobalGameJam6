@@ -14,6 +14,8 @@ public class Obstacle : MonoBehaviour, IAttachable
 
     List<RelativeJoint2D> relativeJoint2DList = new List<RelativeJoint2D>();
 
+    public float health;
+
     public bool isAttached
     {
         get
@@ -76,7 +78,7 @@ public class Obstacle : MonoBehaviour, IAttachable
         clonedCollider.usedByComposite = true;
     }
 
-    public void Drop()
+    public virtual void Drop()
     {
         rigidbody2.bodyType = RigidbodyType2D.Dynamic;
         collider.isTrigger = true;
@@ -91,6 +93,12 @@ public class Obstacle : MonoBehaviour, IAttachable
             Destroy(clonedCollider.gameObject);
             houseManager?.Rebuild();
         }
+    }
+
+    public void Damage(float damage)
+    {
+        health -= damage;
+        if (health <= 0) Drop();
     }
 }
 

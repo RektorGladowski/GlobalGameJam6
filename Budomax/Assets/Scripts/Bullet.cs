@@ -11,7 +11,6 @@ public class Bullet : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        transform.forward = direction;
         rigidbody2d.velocity = direction * bulletSpeed;
     }
 
@@ -22,11 +21,8 @@ public class Bullet : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             WarriorMachine warrior = colliders[i].GetComponent<WarriorMachine>();
-            if(warrior != null) 
-            {
-                warrior.Damage(1);
-                // Add Damage here
-            }
+            if(warrior != null) warrior.Damage(1);
+            Destroy(gameObject);
         }
     }
 

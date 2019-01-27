@@ -2,13 +2,14 @@
 using State;
 using UnityEngine;
 
-public class FlyingEnemy : MonoBehaviour
+public class FlyingEnemy : MonoBehaviour, IEnemy
 {
     [SerializeField] private float distanceToFindEnemy = 5;
     [SerializeField] private float distanceToAttack = 3f;
     [SerializeField] private float cooldown;
     [SerializeField] private float health;
     [SerializeField] private float movementSpeed = 2f;
+    [SerializeField] private Bullet bulletPrfab;
 
     public new Collider2D collider { get; private set; }
     public new Rigidbody2D rigidbody2D { get; private set; }
@@ -17,8 +18,7 @@ public class FlyingEnemy : MonoBehaviour
     private GameObject objectToAttack;
 
     private float lastShootTime = int.MaxValue;
-
-    Bullet bulletPrfab;
+    Animator animator;
 
     enum FlyingEnemyStates
     {
@@ -28,17 +28,21 @@ public class FlyingEnemy : MonoBehaviour
         Cooldown,
     }
 
-    void Awake()
+    void Start()
     {
-        collider.GetComponent<Collider2D>();
-        rigidbody2D.GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         fsm = StateMachine<FlyingEnemyStates>.Initialize(this);
+        fsm.ChangeState(FlyingEnemyStates.SearchingForObjectToShootTo);
     }
 
     void SearchingForObjectToShootTo_Enter()
     {
         objectToAttack = FindEnemy();
-        if (objectToAttack == null) objectToAttack = FindTile().gameObject;
+        Obstacle obstacle = FindTile();
+
+        if (objectToAttack == null && obstacle) objectToAttack = obstacle.gameObject;
         fsm.ChangeState(FlyingEnemyStates.MoveToObject);
     }
 
@@ -69,10 +73,12 @@ public class FlyingEnemy : MonoBehaviour
 
     public void ShootInDirection(Vector2 direction)
     {
+        lastShootTime = Time.time;
         Vector2 directionWithOffset = direction * Mathf.Max(collider.bounds.extents.x, collider.bounds.extents.y);
         Vector3 spawnPosition = transform.position + new Vector3(directionWithOffset.x, directionWithOffset.y, 0);
         Bullet bullet = Instantiate(bulletPrfab, spawnPosition, Quaternion.identity);
         bullet.Move(direction);
+        animator.SetTrigger("shoot");
     }
 
     private Vector2 GetDirctionTowardsEnemy()
@@ -107,12 +113,9 @@ public class FlyingEnemy : MonoBehaviour
         return null;
     }
 
-    /*
-    public void FindTile()
+    public void Damage(float damage)
     {
-        int reults = collider.Raycast(results);
+        health -= damage;
+        if (health <= 0) Destroy(gameObject);
     }
-
-    private void GetDirectionToHome 
-    */
 }

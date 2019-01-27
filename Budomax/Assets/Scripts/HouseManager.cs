@@ -57,6 +57,11 @@ public class HouseManager : MonoBehaviour
         return max;
     }
 
+    public float GetHeight()
+    {
+        return GetHeight(outerWalls);
+    }
+
     public Vector3 GetHouseCenterPoint()
     {
         Bounds houseBouds = compositeCollider.bounds;
