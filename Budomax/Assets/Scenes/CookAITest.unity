@@ -997,6 +997,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793f8bab560f8440b97b6a1d37228c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 2850182226329309600, guid: 460eee7c2365afa4ca45fc3279835778, type: 3}
+  turretBullet: {fileID: 6297784508805015597, guid: fc9a25eae77c3094f83bc61c56b6b747,
+    type: 3}
   HomeObject: {fileID: 765280061}
 --- !u!1 &1617792850
 GameObject:

@@ -2,9 +2,10 @@
 using UnityEngine;
 using PolygonArea;
 using System;
+using State;
 
 [RequireComponent(typeof(CompositeCollider2D))]
-public class HouseManager : MonoBehaviour
+public class HouseManager : MonoBehaviour, IHome
 {
     public Action<RoomData[]> OnHouseRebuild;
 
@@ -12,6 +13,29 @@ public class HouseManager : MonoBehaviour
     public static HouseManager instance;
 
     public CompositeCollider2D compositeCollider { get { if (_compositeCollider == null) _compositeCollider = GetComponent<CompositeCollider2D>(); return _compositeCollider; } }
+
+    #region IHome
+    public Pantry pantry; 
+
+    public IEnumerable<IRoom> Rooms {
+        get
+        {
+            return GetComponentInParent<RoomGenerator>().GetAllRooms();
+        }
+    }
+
+    public IEnumerable<IWall> Walls {
+        get
+        {
+            // TODO: Actually implement getting the walls
+            return new List<IWall>()
+            {
+                pantry,
+            };
+        }
+    }
+    #endregion
+
     private CompositeCollider2D _compositeCollider;
 
     private RoomData outerWalls;

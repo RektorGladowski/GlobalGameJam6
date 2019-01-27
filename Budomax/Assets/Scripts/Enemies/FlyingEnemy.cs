@@ -13,7 +13,7 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
 
     public new Collider2D collider { get; private set; }
     public new Rigidbody2D rigidbody2D { get; private set; }
-
+    public AudioManager am;
     StateMachine<FlyingEnemyStates> fsm;
     private GameObject objectToAttack;
 
@@ -36,6 +36,10 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
         fsm = StateMachine<FlyingEnemyStates>.Initialize(this);
         fsm.ChangeState(FlyingEnemyStates.SearchingForObjectToShootTo);
         lastShootTime = Time.time;
+
+        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        am.playAudio("EnemyFlyingSpawn", 0.1f);
+
     }
 
     void SearchingForObjectToShootTo_Enter()
@@ -95,6 +99,7 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
         Vector3 spawnPosition = transform.position + new Vector3(directionWithOffset.x, directionWithOffset.y, 0);
         Bullet bullet = Instantiate(bulletPrfab, spawnPosition, Quaternion.identity);
         bullet.Move(direction);
+        am.playAudio("EnemyShot", 0.1f);
         animator.SetTrigger("shoot");
     }
 
@@ -132,7 +137,12 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
 
     public void Damage(float damage)
     {
+        am.playAudio("EnemyReceiveDamage", 0.1f);
         health -= damage;
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0)
+        {
+            am.playAudio("EnemyDeath", 0.1f);
+            Destroy(gameObject);
+        }
     }
 }
