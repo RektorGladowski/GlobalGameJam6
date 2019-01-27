@@ -109,7 +109,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
             {
                 float distance = (wall.Position - Position).magnitude;
 
-                if (bestTurret == null || (turret.IsEmpty && distance < bestDistance))
+                if ((bestTurret == null && turret.IsEmpty) || (turret.IsEmpty && distance < bestDistance))
                 {
                     bestTurret = turret;
                     bestDistance = distance;
@@ -129,7 +129,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
         // Walk
         Move(bestTurret.Position);
 
-        // Check if withing reach
+        // Check if within reach
         if (bestDistance > USE_RADIUS) { return; }
 
         fsm.ChangeState(WarriorStates.Turret);
@@ -193,50 +193,50 @@ public class WarriorMachine : MonoBehaviour, IDamageable
         visitedPantry = null;
     }
 
-    void Mount_FixedUpdate()
-    {
-        // Check hunger
-        if (satiation == 0)
-        {
-            fsm.ChangeState(WarriorStates.WannaEat);
-            return;
-        }
+    //void Mount_FixedUpdate()
+    //{
+    //    // Check hunger
+    //    if (satiation == 0)
+    //    {
+    //        fsm.ChangeState(WarriorStates.WannaEat);
+    //        return;
+    //    }
 
-        // Look for nearest available turret
-        ITurret bestTurret = null;
-        float bestDistance = 0f;
+    //    // Look for nearest available turret
+    //    ITurret bestTurret = null;
+    //    float bestDistance = 0f;
 
-        foreach (IWall wall in home.Walls)
-        {
-            if (wall is ITurret turret)
-            {
-                float distance = (wall.Position - Position).magnitude;
+    //    foreach (IWall wall in home.Walls)
+    //    {
+    //        if (wall is ITurret turret)
+    //        {
+    //            float distance = (wall.Position - Position).magnitude;
 
-                if ((bestTurret == null && turret.IsEmpty) || (turret.IsEmpty && distance < bestDistance))
-                {
-                    bestTurret = turret;
-                    bestDistance = distance;
-                }
-            }
-        }
+    //            if ((bestTurret == null && turret.IsEmpty) || (turret.IsEmpty && distance < bestDistance))
+    //            {
+    //                bestTurret = turret;
+    //                bestDistance = distance;
+    //            }
+    //        }
+    //    }
 
-        // Go towards pantry
-        if (bestTurret == null) { return; }
+    //    // Go towards pantry
+    //    if (bestTurret == null) { return; }
 
-        Move(bestTurret.Position);
+    //    Move(bestTurret.Position);
 
-        // Check if within reach
-        if (bestDistance <= USE_RADIUS) {
-            visitedTurret = bestTurret;
-            fsm.ChangeState(WarriorStates.Pantry);
-            return; 
-        }
+    //    // Check if within reach
+    //    if (bestDistance <= USE_RADIUS) {
+    //        visitedTurret = bestTurret;
+    //        fsm.ChangeState(WarriorStates.Turret);
+    //        return; 
+    //    }
 
-        // TODO: Otherwise go to random wall
-        // ...
-    }
+    //    // TODO: Otherwise go to random wall
+    //    // ...
+    //}
 
-    IEnumerable Turret_Enter()
+    IEnumerator Turret_Enter()
     {
         yield return new WaitForSeconds(ACTION_TIME);
 
@@ -253,6 +253,11 @@ public class WarriorMachine : MonoBehaviour, IDamageable
             // ...
         }
     }
+
+    void Turret_Leave()
+    {
+        CancelReservation();
+    }
 }
 
 public enum WarriorStates
@@ -261,6 +266,6 @@ public enum WarriorStates
     Fight,
     WannaEat,
     Pantry,
-    //Mount,
+    Mount,
     Turret,
 }
