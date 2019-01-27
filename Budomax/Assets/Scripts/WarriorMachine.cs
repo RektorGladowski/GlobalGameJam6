@@ -95,6 +95,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
         {
             // TODO: Destroy
             am.playAudio("UnitDeath", 0.3f);
+            Destroy(gameObject);
         }
     }
 
