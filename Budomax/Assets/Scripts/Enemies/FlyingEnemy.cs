@@ -13,6 +13,9 @@ public class FlyingEnemy : MonoBehaviour, IEnemy
 
     public new Collider2D collider { get; private set; }
     public new Rigidbody2D rigidbody2D { get; private set; }
+
+    //public int Health => (int)health;
+
     public AudioManager am;
     StateMachine<FlyingEnemyStates> fsm;
     private GameObject objectToAttack;
