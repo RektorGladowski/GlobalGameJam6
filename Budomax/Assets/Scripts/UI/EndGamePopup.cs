@@ -33,7 +33,7 @@ public class EndGamePopup : MonoBehaviour, IPopup<EndGamePopupSetupData>
     public void OnRestartButtonPressed ()
     {
         SetPanelInteractability(false);
-        managerCallback(EndGamePopupResult.RestartGame);
+        managerCallback?.Invoke(EndGamePopupResult.RestartGame);
     }
 
     void SetPanelInteractability(bool interactable)

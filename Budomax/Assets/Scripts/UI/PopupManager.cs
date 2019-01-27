@@ -7,7 +7,7 @@ public class PopupManager : MonoBehaviour
     public static PopupManager instance;
     public Action<RoomTypeSelection> OnRoomTypeSelected;
     public Action<EndGamePopupResult> OnEndGameOptionSelected;
-
+    public Action<EscapePanelSelection> OnEscapePanelOptionSelected;
 
     void Awake() => instance = this;
 
@@ -53,6 +53,19 @@ public class PopupManager : MonoBehaviour
     #endregion
 
     #region Escape Panel Popup
+    public void ShowEscapePanel ()
+    {
+        GetComponentInChildren<IPopup<EscapePanelPopupSetupData>>()?.OpenPopup(new EscapePanelPopupSetupData(EscapePanelButtonExit));
+    }
 
+    public void CloseEscapePanel ()
+    {
+        GetComponentInChildren<IPopup<EscapePanelPopupSetupData>>()?.ClosePopupManually();
+    }
+
+    void EscapePanelButtonExit (EscapePanelSelection eps)
+    {
+        OnEscapePanelOptionSelected?.Invoke(eps);
+    }
     #endregion
 }

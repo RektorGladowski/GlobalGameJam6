@@ -25,19 +25,19 @@ public class RoomSelectionPopup : MonoBehaviour, IPopup<RoomSelectionPopupSetupD
     public void OnKitchenButtonPressed ()
     {
         SetPanelInteractability(false);
-        managerCallback(RoomTypeSelection.Kitchen);
+        managerCallback?.Invoke(RoomTypeSelection.Kitchen);
     }
 
     public void OnBarracksButtonPressed ()
     {
         SetPanelInteractability(false);
-        managerCallback(RoomTypeSelection.Barracks);
+        managerCallback?.Invoke(RoomTypeSelection.Barracks);
     }
 
     public void OnScavengerButtonPressed ()
     {
         SetPanelInteractability(false);
-        managerCallback(RoomTypeSelection.ScavengerRoom);
+        managerCallback?.Invoke(RoomTypeSelection.ScavengerRoom);
     }
    
     void SetPanelInteractability(bool interactable)
