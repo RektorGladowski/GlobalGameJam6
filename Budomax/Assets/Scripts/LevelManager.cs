@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
 
     void ReloadLevel()
     {
-        StartCoroutine(WaitForLoadAndLoadLevel(SceneManager.GetActiveScene().name));
+        StartCoroutine(WaitForLoadAndLoadLevel("Reset"));
     }
     #endregion
     
