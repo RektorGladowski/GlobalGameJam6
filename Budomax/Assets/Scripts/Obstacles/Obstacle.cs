@@ -78,11 +78,11 @@ public class Obstacle : MonoBehaviour, IAttachable
 
     private void CloneColliderAndAttach(CompositeCollider2D composite)
     {
-  
         GameObject go = new GameObject("Obstacle", typeof(PolygonCollider2D));
         go.transform.position = transform.position;
         go.transform.rotation = transform.rotation;
         go.transform.SetParent(composite.transform);
+        go.transform.localScale = transform.localScale;
 
         clonedCollider = go.GetComponent<PolygonCollider2D>();
         clonedCollider.pathCount = collider.pathCount;

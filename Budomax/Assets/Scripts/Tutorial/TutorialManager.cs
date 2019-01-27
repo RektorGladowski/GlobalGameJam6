@@ -106,12 +106,6 @@ public class TutorialManager : MonoBehaviour
         if (currentTutorialStage <= TutorialStage.BuildKitchen)
             UpdateTutorialStage(TutorialStage.BuildKitchen);
     }
-    
-    public void OnFeederPlaced ()
-    {
-        if (currentTutorialStage <= TutorialStage.BuildFeeder)
-            UpdateTutorialStage(TutorialStage.BuildFeeder);
-    }
 
     public void OnBarracksCreated ()
     {
