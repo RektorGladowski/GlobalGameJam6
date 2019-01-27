@@ -16,6 +16,10 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Material baracksRoomMaterial;
     [SerializeField] private Material scavengerRoomMaterial;
 
+    public GameObject Warrior;
+    public GameObject Scavenger;
+    public GameObject Cook;
+
     private void Awake() {
         
         houseManager.OnHouseRebuild = UpdateRooms;
@@ -69,16 +73,19 @@ public class RoomGenerator : MonoBehaviour
         switch (roomType)
         {
             case RoomTypeSelection.Kitchen:
+                Instantiate(Cook, room.Position, Quaternion.identity);
                 TutorialManager.instance.OnKitchenRoomCreated();
                 am.playAudio("AssignRoom-Kitchen", 0.3f);
                 room.material = kitchenMaterial; break;
 
             case RoomTypeSelection.Barracks:
+                Instantiate(Warrior, room.Position, Quaternion.identity);
                 TutorialManager.instance.OnBarracksCreated();
                 am.playAudio("AssignRoom-Warrior", 0.3f);
                 room.material = baracksRoomMaterial; break;
 
             case RoomTypeSelection.ScavengerRoom:
+                Instantiate(Scavenger, room.Position, Quaternion.identity);
                 TutorialManager.instance.OnScavengerRoomCreated();
                 am.playAudio("AssignRoom-Scav", 0.3f);
                 room.material = scavengerRoomMaterial; break;

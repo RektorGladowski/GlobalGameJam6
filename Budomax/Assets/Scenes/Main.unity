@@ -6688,6 +6688,9 @@ MonoBehaviour:
   baracksRoomMaterial: {fileID: 2100000, guid: 14c4231705e319e4490371fa31fc817a, type: 2}
   scavengerRoomMaterial: {fileID: 2100000, guid: 7dc849375db31754fbc07ab3018d8a71,
     type: 2}
+  Warrior: {fileID: 3397657269282636889, guid: 4f290f5e32dec496cb4ec50541d52de0, type: 3}
+  Scavenger: {fileID: 1704123407}
+  Cook: {fileID: 0}
 --- !u!114 &2099662259
 MonoBehaviour:
   m_ObjectHideFlags: 0
