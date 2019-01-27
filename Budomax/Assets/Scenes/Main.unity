@@ -3571,14 +3571,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.27785218, b: 0, a: 0.26666668}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.54901963}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 49c9fb79bb5f97c44abc3e8167cabdf5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3718,7 +3718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availablePopupSprites:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 49c9fb79bb5f97c44abc3e8167cabdf5, type: 3}
   popupTextColor: {r: 1, g: 1, b: 1, a: 1}
   popupRT: {fileID: 1635318905}
   popupImage: {fileID: 1109134683}
@@ -3735,7 +3735,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f481ea22995504d95c19994af6b343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialStages: []
+  tutorialStages:
+  - stageType: 1
+    timeToShow: 5
+    stageMessage: Drag and drop a wall to build
+  - stageType: 0
+    timeToShow: 4
+    stageMessage: Rotate using Q and E
+  - stageType: 1
+    timeToShow: 3
+    stageMessage: Enclose a room to finish it
+  - stageType: 1
+    timeToShow: 3
+    stageMessage: Select Scavenger Room
+  - stageType: 0
+    timeToShow: 5
+    stageMessage: Scavengers will go out looking for new parts
+  - stageType: 0
+    timeToShow: 4
+    stageMessage: Your units are getting hungry!
+  - stageType: 1
+    timeToShow: 0
+    stageMessage: Build a Kitchen
+  - stageType: 0
+    timeToShow: 4
+    stageMessage: Cooks will prepare food and stock up the feeders
+  - stageType: 0
+    timeToShow: 4
+    stageMessage: Units go to feeders to eat and restore energy
+  - stageType: 0
+    timeToShow: 3
+    stageMessage: "Look out! It\u2019s an enemy! To arms!"
+  - stageType: 1
+    timeToShow: 4
+    stageMessage: Build Barracks
+  - stageType: 0
+    timeToShow: 4
+    stageMessage: 'Defend your home! '
   popupScript: {fileID: 1146130101}
 --- !u!1001 &1169839097
 PrefabInstance:
@@ -5914,8 +5950,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 12919bc735167264d9cad9fad89aee75, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
