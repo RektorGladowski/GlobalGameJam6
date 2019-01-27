@@ -9,11 +9,15 @@ public class Kitchen : MonoBehaviour, IRoom
     {
         Workers = 0;
         MaxWorkers = 3;
+        //type = Building.Kitchen;
     }
 
     public List<GameObject> WallObjects;
 
-    public Building Type => Building.Kitchen;
+    // For the editor
+    public Building type;
+
+    public Building Type { get => type; set { type = value; } }
 
     public IEnumerable<IWall> Walls => throw new System.NotImplementedException();
 
