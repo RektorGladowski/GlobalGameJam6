@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetRandomSpawnPoint()
     {
-        var randomPoint = UnityEngine.Random.onUnitSphere * HouseManager.instance.GetHouseMaxDistance();
+        var randomPoint = UnityEngine.Random.onUnitSphere * HouseManager.instance.GetHouseMaxDistance() * 2;
         randomPoint.y = Mathf.Abs(randomPoint.y); // force top.y = Mathf.Abs(P.y);
         randomPoint.z = 0;
         return randomPoint + HouseManager.instance.GetHouseCenterPoint();

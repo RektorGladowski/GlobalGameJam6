@@ -73,7 +73,6 @@ public class Obstacle : MonoBehaviour, IAttachable
         RelativeJoint2D relativeJoint2D = gameObject.AddComponent<RelativeJoint2D>();
         relativeJoint2D.connectedBody = rigidbody;
         relativeJoint2DList.Add(relativeJoint2D);
-       
     }
 
     private void CloneColliderAndAttach(CompositeCollider2D composite)

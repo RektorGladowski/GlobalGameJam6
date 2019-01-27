@@ -68,6 +68,10 @@ public class RoomGenerator : MonoBehaviour
         }
     }
 
+    int cooks = 0;
+    int warriors = 0;
+    int scavengers = 0;
+
     private void OnRoomTypeSelected(Room room, RoomTypeSelection roomType)
     {
         var spawnPoint = new Vector3(room.Position.x, room.Position.y, -8);
@@ -77,18 +81,24 @@ public class RoomGenerator : MonoBehaviour
         {
             case RoomTypeSelection.Kitchen:
                 Instantiate(Cook, spawnPoint, Quaternion.identity);
+                cooks += 1;
+                UIManager.instance.UpdateCooksNumber(cooks);
                 TutorialManager.instance.OnKitchenRoomCreated();
                 am.playAudio("AssignRoom-Kitchen", 0.3f);
                 room.material = kitchenMaterial; break;
 
             case RoomTypeSelection.Barracks:
                 Instantiate(Warrior, spawnPoint, Quaternion.identity);
+                warriors += 1;
+                UIManager.instance.UpdateWarriorsNumber(warriors);
                 TutorialManager.instance.OnBarracksCreated();
                 am.playAudio("AssignRoom-Warrior", 0.3f);
                 room.material = baracksRoomMaterial; break;
 
             case RoomTypeSelection.ScavengerRoom:
                 Instantiate(Scavenger, spawnPoint, Quaternion.identity);
+                scavengers += 1;
+                UIManager.instance.UpdateScavsNumber(scavengers);
                 TutorialManager.instance.OnScavengerRoomCreated();
                 am.playAudio("AssignRoom-Scav", 0.3f);
                 room.material = scavengerRoomMaterial; break;
