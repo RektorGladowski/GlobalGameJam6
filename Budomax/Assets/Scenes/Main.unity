@@ -749,7 +749,6 @@ MonoBehaviour:
   range: 20
   bounce: 1
   startLeft: 1
-  am: {fileID: 0}
 --- !u!1 &304402161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,7 +1382,6 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
-  am: {fileID: 0}
 --- !u!212 &481007115
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2000,7 +1998,6 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 0
-  am: {fileID: 0}
 --- !u!212 &698046801
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2522,7 +2519,6 @@ MonoBehaviour:
   range: 20
   bounce: 1
   startLeft: 1
-  am: {fileID: 0}
 --- !u!1 &842995533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,7 +2567,6 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
-  am: {fileID: 0}
 --- !u!212 &842995536
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3109,7 +3104,6 @@ MonoBehaviour:
   range: 5
   bounce: 1
   startLeft: 0
-  am: {fileID: 0}
 --- !u!1 &996150769
 GameObject:
   m_ObjectHideFlags: 0
@@ -3280,7 +3274,6 @@ MonoBehaviour:
   range: 20
   bounce: 1
   startLeft: 1
-  am: {fileID: 0}
 --- !u!1 &1066831236
 GameObject:
   m_ObjectHideFlags: 0
@@ -3329,7 +3322,6 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
-  am: {fileID: 0}
 --- !u!212 &1066831239
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3641,6 +3633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f481ea22995504d95c19994af6b343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialStages: []
+  popupScript: {fileID: 1146130101}
 --- !u!1001 &1169839097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3798,7 +3792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d1a6c2a11872542be0ca35000247e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  am: {fileID: 0}
 --- !u!50 &1253226740
 Rigidbody2D:
   serializedVersion: 4
@@ -3915,7 +3909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d1a6c2a11872542be0ca35000247e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  am: {fileID: 0}
 --- !u!4 &1301581179
 Transform:
   m_ObjectHideFlags: 0
@@ -4356,7 +4350,6 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 1
-  am: {fileID: 0}
 --- !u!212 &1366279956
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5857,7 +5850,6 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 0
-  am: {fileID: 0}
 --- !u!212 &1935074391
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6716,7 +6708,6 @@ MonoBehaviour:
   range: 60
   bounce: 1
   startLeft: 0
-  am: {fileID: 0}
 --- !u!212 &2100944133
 SpriteRenderer:
   m_ObjectHideFlags: 0

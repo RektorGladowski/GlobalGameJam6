@@ -25,6 +25,7 @@ public class TutorialManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        popupScript = GetComponent<TutorialPopup>();
         CheckIfTutorialIsNecessary();
     }
 
