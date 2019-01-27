@@ -34,9 +34,6 @@ public class TutorialManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("tutorialInfo") == 0)
             {
-                PlayerPrefs.SetInt("tutorialInfo", 1);
-                PlayerPrefs.Save();
-
                 state = TutorialCheckState.Running;
             }
             else
@@ -156,6 +153,8 @@ public class TutorialManager : MonoBehaviour
             }
             else
             {
+                PlayerPrefs.SetInt("tutorialInfo", 1);
+                PlayerPrefs.Save();
                 popupScript.ClosePopupManually();
             }
         }       
