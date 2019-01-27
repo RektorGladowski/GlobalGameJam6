@@ -87,7 +87,7 @@ public class ScavengerMachine : MonoBehaviour
 
         foreach (IRoom room in home.Rooms)
         {
-            if (room.Type == Building.Wasteland)
+            if (room.Type == RoomTypeSelection.ScavengerRoom)
             {
                 float distance = (room.Position - Position).magnitude;
                 bool isAvailable = room.Workers < room.MaxWorkers;

@@ -94,7 +94,7 @@ public class Cook : MonoBehaviour, IBot
 
             foreach (IRoom room in home.Rooms)
             {
-                if (room.Type == Building.Kitchen)
+                if (room.Type == RoomTypeSelection.Kitchen)
                 {
                     float distance = (room.Position - Position).magnitude;
                     bool isAvailable = room.Workers < room.MaxWorkers;

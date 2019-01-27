@@ -1,10 +1,4 @@
-﻿using UnityEngine;
-
-public interface IEnemy
+﻿public interface IEnemy
 {
-    Collider2D collider { get; }
-    float Health { get; }
-    float Cooldown { get; }
-    void Attack();
-    void FindTile();
+    void Damage(float damage);
 }

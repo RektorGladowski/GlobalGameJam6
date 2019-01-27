@@ -2,12 +2,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialPopup : MonoBehaviour, IPopup<QueueableMessage>
+public class TutorialPopup : MonoBehaviour
 {
     // Constants
     const float Popup_Max_Teleport_Gap = 0.35f;
-    const float Popup_Max_Movement_Speed = 12000f;
-    const float Popup_Transition_Time = 0.3f;
+    const float Popup_Max_Movement_Speed = 36000f;
+    const float Popup_Transition_Time = 0.1f;
 
     delegate void PopupMover();
     PopupMover MovePopup = null;
@@ -22,20 +22,26 @@ public class TutorialPopup : MonoBehaviour, IPopup<QueueableMessage>
     public Text popupText;
 
     // Showing messages
-    Queue<QueueableMessage> messagesToDisplay = new Queue<QueueableMessage>();
-    QueueableMessage currentMessage;
+    List<string> popupMessages = new List<string>();
+    int currentMessageID = 0;
+    bool waitingToShowNextMessage = false; 
 
     // Animation variables
+    TutorialPopupState currentPopupState = TutorialPopupState.Hidden;
     Vector2 relShowV, relHideV;
     Vector2 hideTarget;
     float maxGap;
     float maxSpeed;
     float transTime;
 
+    
 
     #region Setting up
-    void Awake ()
+    public void SetupPopups (List<string> messages)
     {
+        // Assign messages
+        popupMessages = messages;
+
         // Change position of the popup and deactivate its object
         popupRT.anchoredPosition = new Vector2(-Screen.width, 0f);
         popupRT.gameObject.SetActive(false);
@@ -47,7 +53,6 @@ public class TutorialPopup : MonoBehaviour, IPopup<QueueableMessage>
      
         relHideV = relShowV = Vector2.zero;
         hideTarget = new Vector2(-Screen.width, 0f);
-        currentMessage = null;
     }
     #endregion
 
@@ -82,67 +87,59 @@ public class TutorialPopup : MonoBehaviour, IPopup<QueueableMessage>
     #region Animation events
     void StartShowing ()
     {
+        waitingToShowNextMessage = false;
+        currentPopupState = TutorialPopupState.Showing;
+
+        popupText.text = popupMessages[currentMessageID];
+        popupImage.sprite = availablePopupSprites[Random.Range(0, availablePopupSprites.Length)];
         popupRT.gameObject.SetActive(true);
         MovePopup = ShowPopup;
     }
 
     void StartHiding()
     {
+        currentPopupState = TutorialPopupState.Hiding;
         MovePopup = HidePopup;
     }
 
     void FinishedShowing()
     {
+        currentPopupState = TutorialPopupState.Shown;
         MovePopup = null;
     }
 
     void FinishedHiding()
     {
+        currentPopupState = TutorialPopupState.Hidden;
         MovePopup = null;
         popupRT.gameObject.SetActive(false);
 
-        DequeuePreviousMessage();
-        if (!IsTheQueueEmpty()) StartShowingQueueableMessage();      
+        if (waitingToShowNextMessage) StartShowing();  
     }
     #endregion
 
-    #region Managing Queue
-    public void OpenPopup (QueueableMessage msg)
+    #region Managing Messages
+    public void ShowMessage (int messageID)
     {
-        if (IsTheQueueEmpty())
+        currentMessageID = messageID;
+       
+        if (currentPopupState != TutorialPopupState.Hidden)
         {
-            messagesToDisplay.Enqueue(msg);
-            StartShowingQueueableMessage();
+            waitingToShowNextMessage = true;
+            StartHiding();
         }
         else
         {
-            messagesToDisplay.Enqueue(msg);
+            StartShowing();
         }
     }
 
     public void ClosePopupManually ()
-    { 
+    {
+        waitingToShowNextMessage = false;
         StartHiding();
-    }
-
-    void DequeuePreviousMessage()
-    {
-        // Just dequeue the message
-        messagesToDisplay.Dequeue();
-        currentMessage = null;
-    }
-
-    void StartShowingQueueableMessage()
-    {
-        // Get message from queue
-        currentMessage = messagesToDisplay.Peek();
-        popupText.text = currentMessage.messageText;
-        popupImage.sprite = availablePopupSprites[Random.Range(0, availablePopupSprites.Length)];
-
-        StartShowing();
     }
     #endregion
 
     void Update() => MovePopup?.Invoke();
-    bool IsTheQueueEmpty() => (messagesToDisplay.Count == 0);
 }

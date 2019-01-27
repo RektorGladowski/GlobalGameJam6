@@ -2,12 +2,12 @@
 
 namespace State
 {
-    public interface IWall
+    public interface IWall : IDamageable
     {
         Vector2 Position { get; }
 
         int MaxHealth { get; }
 
-        int Health { get; }
+        //int Health { get; }
     }
 }

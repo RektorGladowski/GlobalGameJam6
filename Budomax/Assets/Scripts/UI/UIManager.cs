@@ -8,8 +8,14 @@ public class UIManager : MonoBehaviour
     public UIEnergyCounter energyCounter;
     public UIUnitCounter cooksCounter, scavsCounter, warriorsCounter;
 
+    CameraMovement camMovement;
+
     #region Awake and Updates
-    void Awake() => instance = this;
+    void Awake()
+    {
+        instance = this;
+        camMovement = Camera.main.GetComponent<CameraMovement>();
+    }
 
     void LateUpdate()
     {
@@ -22,7 +28,11 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Public methods for updating UI
-    public void UpdateTotalHeight(float height) => heightCounter.SetTargetValue(height);
+    public void UpdateTotalHeight(float height)
+    {
+        heightCounter.SetTargetValue(height);
+        camMovement.UpdateTopConstraint(height);
+    }
 
     public void UpdateAverageEnergy(float energyPercent) => energyCounter.SetTargetValue(energyPercent);
 

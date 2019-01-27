@@ -36,7 +36,7 @@ public class RoomGenerator : MonoBehaviour
         {
             if (!rooms.ContainsKey(roomDatas[i].ID) && roomDatas[i].Area > minimumArea)
             {
-                GameObject go = new GameObject("RoomName", typeof(Room), typeof(MeshFilter), typeof(MeshRenderer));
+                GameObject go = new GameObject("Room", typeof(Room), typeof(MeshFilter), typeof(MeshRenderer));
                 go.GetComponent<MeshFilter>().mesh = roomDatas[i].Mesh;
                 go.GetComponent<MeshRenderer>().material = kitchenMaterial;
                 Room room = go.GetComponent<Room>();
