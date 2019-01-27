@@ -13,11 +13,9 @@ public class HorizontalMovement : MonoBehaviour
     private Vector3 direction;
     private Vector3 startPos;
     private float distance;
-    public AudioManager am;
     // Start is called before the first frame update
     void Start()
     {
-        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         if (startLeft) direction = new Vector3(-speed, 0, 0);
         else direction = new Vector3(speed, 0, 0);
     }
