@@ -16,7 +16,7 @@ public class Home : MonoBehaviour, IHome
             List<IRoom> rooms = new List<IRoom>();
             foreach (var obj in RoomObjects)
             {
-                IRoom room = obj.GetComponent<Kitchen>();
+                IRoom room = obj.GetComponent<IRoom>();
                 if (room != null)
                 {
                     rooms.Add(room);
@@ -34,7 +34,7 @@ public class Home : MonoBehaviour, IHome
             foreach (var obj in WallObjects)
             {
                 // Hack, proper implementation of IHome should be better
-                IWall wall = obj.GetComponent<Pantry>();
+                IWall wall = obj.GetComponent<IWall>();
 
                 if (wall != null)
                 {

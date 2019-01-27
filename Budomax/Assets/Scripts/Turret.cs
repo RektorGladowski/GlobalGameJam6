@@ -7,7 +7,7 @@ public class Turret : MonoBehaviour, ITurret
 {
     void Start()
     {
-        isEmpty = false;
+        isEmpty = true;
         health = MaxHealth;
     }
 
