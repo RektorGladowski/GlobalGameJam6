@@ -1,11 +1,59 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject[] prefabFlyingType;
     public GameObject[] prefabWalkingType;
+
+    public float prewarmTime = 10f;
+    public float currentTime = 1f;
+    public float lastSpawnTime = 0f;
+
+    private float baseMonsters = 30;
+    private float cooldown = 30;
+
+    private bool canSpawn = false;
+
+    private void Start()
+    {
+        canSpawn = true;
+        currentTime = Time.time;
+
+        if(TutorialManager.instance != null)
+        {
+            if (TutorialManager.instance.IsRunning())
+            {
+                TutorialManager.EnemySpawnerReadyToGo += OnEnemySPawnerGo;
+            }
+            else
+            {
+                OnEnemySPawnerGo();
+            }
+        }
+    }
+
+    private void OnEnemySPawnerGo()
+    {
+        if (Time.time - currentTime > prewarmTime)
+        {
+            canSpawn = true;
+        }
+    }
+
+    private void Update()
+    {
+        // calculate equation
+        cooldown = baseMonsters - 5 * (Time.time / baseMonsters);
+        cooldown = Mathf.Max(cooldown, 5);
+
+        Debug.Log(cooldown);
+
+        if (Time.time - lastSpawnTime > cooldown && canSpawn)
+        {
+            SpawnEnemy();
+        }
+
+    }
 
 
     private void SpawnEnemy()
@@ -15,7 +63,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetRandomSpawnPoint()
     {
-        var randomPoint = Random.onUnitSphere * HouseManager.instance.GetHouseMaxDistance();
+        var randomPoint = UnityEngine.Random.onUnitSphere * HouseManager.instance.GetHouseMaxDistance();
         randomPoint.y = Mathf.Abs(randomPoint.y); // force top.y = Mathf.Abs(P.y);
         return randomPoint + HouseManager.instance.GetHouseCenterPoint();
     }
@@ -23,15 +71,10 @@ public class EnemySpawner : MonoBehaviour
 
     private GameObject GetRandomEnemyPrefab()
     {
-        EnemyType randomEnemyType = (EnemyType) Random.Range(0, 2);
+        EnemyType randomEnemyType = (EnemyType)UnityEngine.Random.Range(0, 2);
         switch (randomEnemyType)
         {
-            case EnemyType.Flying:
-                return prefabFlyingType[Random.Range(0, prefabFlyingType.Length)];
-            case EnemyType.Walking:
-                return prefabFlyingType[Random.Range(0, prefabWalkingType.Length)];
-            default:
-                return prefabFlyingType[Random.Range(0, prefabFlyingType.Length)];
+            default: return prefabFlyingType[UnityEngine.Random.Range(0, prefabFlyingType.Length)];
         }
     }
 }

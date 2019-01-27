@@ -22,7 +22,14 @@ public class Bullet : MonoBehaviour
         {
             WarriorMachine warrior = colliders[i].GetComponent<WarriorMachine>();
             if(warrior != null) warrior.Damage(1);
-            Destroy(gameObject);
+
+            Obstacle obstacle = colliders[i].GetComponent<Obstacle>();
+            if (obstacle != null) obstacle.Damage(1);
+
+            if (colliders[i].GetComponent<IEnemy>() == null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
