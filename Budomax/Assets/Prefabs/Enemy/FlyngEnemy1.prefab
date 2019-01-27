@@ -80,7 +80,7 @@ MonoBehaviour:
   distanceToAttack: 8
   cooldown: 2
   health: 1
-  movementSpeed: 1
+  movementSpeed: 2
   bulletPrfab: {fileID: 2850182226329309606, guid: 460eee7c2365afa4ca45fc3279835778,
     type: 3}
 --- !u!50 &2424765981473513333

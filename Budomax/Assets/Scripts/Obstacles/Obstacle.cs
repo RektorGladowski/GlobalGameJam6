@@ -57,6 +57,7 @@ public class Obstacle : MonoBehaviour, IAttachable
             {
                 CloneColliderAndAttach(tmpCompositeCollider);
                 tmpCompositeCollider.GetComponent<HouseManager>().Rebuild();
+                TutorialManager.instance.OnWallPlaced();
                 return true;
             }
         }

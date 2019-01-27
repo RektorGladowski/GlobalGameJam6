@@ -3793,6 +3793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   am: {fileID: 0}
+  health: 3
 --- !u!50 &1253226740
 Rigidbody2D:
   serializedVersion: 4
@@ -3910,6 +3911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   am: {fileID: 0}
+  health: 3
 --- !u!4 &1301581179
 Transform:
   m_ObjectHideFlags: 0
@@ -6484,6 +6486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumArea: 7
+  am: {fileID: 0}
   kitchenMaterial: {fileID: 2100000, guid: 9d007dca83539034fa9fe6445a00e7a5, type: 2}
   baracksRoomMaterial: {fileID: 2100000, guid: 14c4231705e319e4490371fa31fc817a, type: 2}
   scavengerRoomMaterial: {fileID: 2100000, guid: 7dc849375db31754fbc07ab3018d8a71,
@@ -6970,11 +6973,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8316089157334731745, guid: 53cae6b1b1347c841a0248b34fbb851e,
-        type: 3}
-      propertyPath: movementSpeed
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53cae6b1b1347c841a0248b34fbb851e, type: 3}
