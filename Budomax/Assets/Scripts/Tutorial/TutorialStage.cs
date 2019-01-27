@@ -13,7 +13,5 @@ public enum TutorialStage
     UnitsInfo = 9,
     EnemiesApproaching = 10,
     BuildBarracks = 11,
-    OrderButton = 12,
-    ClickOnLocation = 13,
-    DefendHome = 14,
+    DefendHome = 12,
 }

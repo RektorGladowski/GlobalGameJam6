@@ -116,20 +116,6 @@ public class TutorialManager : MonoBehaviour
     {
         if (currentTutorialStage <= TutorialStage.BuildBarracks)
             UpdateTutorialStage(TutorialStage.BuildBarracks);
-
-        UIManager.instance.ShowOrderButton();
-    }
-
-    public void OnOrderButtonClicked ()
-    {
-        if (currentTutorialStage <= TutorialStage.OrderButton)
-            UpdateTutorialStage(TutorialStage.OrderButton);
-    }
-
-    public void OnOrderPlaced ()
-    {
-        if (currentTutorialStage <= TutorialStage.ClickOnLocation)
-            UpdateTutorialStage(TutorialStage.ClickOnLocation);
     }
     #endregion
 
@@ -175,11 +161,4 @@ public class TutorialManager : MonoBehaviour
         UpdateTimer?.Invoke();
     }
     #endregion
-}
-
-public enum TutorialCheckState
-{
-    Checking,
-    Running,
-    NotRunning,
 }

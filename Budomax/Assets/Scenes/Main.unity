@@ -3653,50 +3653,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialStages:
-  - stageType: 0
+  - stageType: 1
     timeToShow: 5
     stageMessage: Drag and drop a wall to build rooms
   - stageType: 0
     timeToShow: 5
     stageMessage: Rotate walls using Q and E
-  - stageType: 0
+  - stageType: 1
     timeToShow: 5
     stageMessage: Enclose a room to finish it
-  - stageType: 0
+  - stageType: 1
     timeToShow: 5
     stageMessage: Select Scavenger Room
   - stageType: 0
     timeToShow: 5
     stageMessage: Scavengers will go out looking for new parts
   - stageType: 0
-    timeToShow: 5
+    timeToShow: 3
     stageMessage: Your units are getting hungry!
-  - stageType: 0
+  - stageType: 1
     timeToShow: 5
     stageMessage: Build a Kitchen
-  - stageType: 0
+  - stageType: 1
     timeToShow: 5
     stageMessage: Build a Feeder
   - stageType: 0
-    timeToShow: 5
+    timeToShow: 4
     stageMessage: Cooks will prepare food and stock up the feeders
   - stageType: 0
-    timeToShow: 5
+    timeToShow: 4
     stageMessage: Units go to feeders to eat and restore energy
   - stageType: 0
-    timeToShow: 5
+    timeToShow: 3
     stageMessage: "Look out! It\u2019s an enemy! To arms!"
-  - stageType: 0
+  - stageType: 1
     timeToShow: 5
     stageMessage: Build Barracks
   - stageType: 0
-    timeToShow: 5
-    stageMessage: Click on the Order button
-  - stageType: 0
-    timeToShow: 5
-    stageMessage: Click on a location to send Warriors
-  - stageType: 0
-    timeToShow: 5
+    timeToShow: 3
     stageMessage: Defend your home!
   popupScript: {fileID: 1146130101}
 --- !u!1001 &1169839097
