@@ -64,7 +64,7 @@ public class Obstacle : MonoBehaviour, IAttachable
 
     private void AttachJointToRigidbody(Rigidbody2D rigidbody)
     {
-        am.playAudio("BuildOneWall", 0.3f);
+        am.playAudio("BuildOneWall", 0.1f);
 
         rigidbody2.bodyType = RigidbodyType2D.Dynamic;
 
