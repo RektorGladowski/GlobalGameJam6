@@ -8,6 +8,9 @@ public class Wall : MonoBehaviour, IDamageable
     public List<Wall> neighbours = new List<Wall>();
     public Rigidbody2D rigidbody2 { get; private set; }
     public new PolygonCollider2D collider { get; private set; }
+
+    public int Health => (int)currentHP;
+
     float currentHP;
 
     void Awake()
@@ -53,7 +56,7 @@ public class Wall : MonoBehaviour, IDamageable
 
 
 
-    public void TakeDamage(float damage)
+    public void Damage(int damage)
     {
         if (wallConfig.damageable)
         {

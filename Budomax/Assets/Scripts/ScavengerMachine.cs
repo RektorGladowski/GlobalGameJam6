@@ -74,7 +74,7 @@ public class ScavengerMachine : MonoBehaviour
 
     void CancelReservation()
     {
-        reservedRoom.Leave();
+        reservedRoom?.Leave();
         reservedRoom = null;
     }
 

@@ -35,7 +35,7 @@ public class CookMachine : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Carried food " + carriedFood);
+        //Debug.Log("Carried food " + carriedFood);
     }
 
     Vector2 Position { get => gameObject.transform.position; }
@@ -57,7 +57,7 @@ public class CookMachine : MonoBehaviour
 
     void CancelReservation()
     {
-        reservedRoom.Leave();
+        reservedRoom?.Leave();
         reservedRoom = null;
     }
 

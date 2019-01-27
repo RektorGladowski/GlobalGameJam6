@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using State;
 
-public class Pantry : MonoBehaviour, IPantry
+public class Pantry : MonoBehaviour, IPantry, IDamageable
 {
     void Start()
     {
-        Food = 0;
+        food = 0;
+        health = MaxHealth;
     }
 
-    public int MaxHealth => throw new System.NotImplementedException();
+    bool isDestroyed;
 
-    public int Health => throw new System.NotImplementedException();
+    [SerializeField]
+    int health;
+
+    public int MaxHealth => 20;
+
+    public int Health { get => health; set { health = value; } }
 
     public Vector2 Position => gameObject.transform.position;
 
@@ -31,5 +37,14 @@ public class Pantry : MonoBehaviour, IPantry
     public void Fill(int amount)
     {
         Food += Mathf.Min(MaxFood - Food, amount);
+    }
+
+    public void Damage(int damage)
+    {
+        Health -= damage;
+        //if (Health <= 0)
+        //{
+        //    isDestroyed = true;
+        //}
     }
 }
