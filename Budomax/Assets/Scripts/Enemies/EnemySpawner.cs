@@ -58,6 +58,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        lastSpawnTime = Time.time;
         Instantiate(GetRandomEnemyPrefab(), GetRandomSpawnPoint(), Quaternion.identity, transform);
     }
 
