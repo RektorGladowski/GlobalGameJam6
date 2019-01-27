@@ -108,7 +108,7 @@ public class CookMachine : MonoBehaviour
     {
         carriedFood += COOKING_SKILL;
 
-        am.playAudio("BuildOneWall", 0.3f);
+        am.playAudio("Eating_alt", 0.3f);
         yield return new WaitForSeconds(ACTION_TIME);
 
 

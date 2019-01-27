@@ -5,9 +5,16 @@ using UnityEngine.EventSystems;
 public class Interactable : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public float rotationSpeed = 200f;
+    public AudioManager am;
 
     WallInteractionMode interactionMode = WallInteractionMode.Targetable;
     Vector3 mouseOffset;
+
+
+    void Start()
+    {
+        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    }
 
     void LateUpdate()
     {
@@ -19,14 +26,24 @@ public class Interactable : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         if (interactionMode == WallInteractionMode.Draggable)
         {
             if (Input.GetKey(KeyCode.Q))
-                transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime); // Rotate left
+            {
+                am.playAudio("GenericClick", 0.02f);
+                transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+            }
+                // Rotate left
             else if (Input.GetKey(KeyCode.E))
-                transform.Rotate(Vector3.forward * -rotationSpeed * Time.deltaTime); // Rotate right
+            {
+                am.playAudio("GenericClick", 0.02f);
+                transform.Rotate(Vector3.forward * -rotationSpeed * Time.deltaTime);
+            }
+                 // Rotate right
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        //am.playAudio("GenericClick", 0.02f);
+
         if (interactionMode == WallInteractionMode.Draggable)
         {
             transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + mouseOffset;
@@ -35,6 +52,7 @@ public class Interactable : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        am.playAudio("GenericClick", 0.5f);
         if (interactionMode == WallInteractionMode.Targetable)
         {
             interactionMode = WallInteractionMode.Draggable;
@@ -46,6 +64,7 @@ public class Interactable : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        am.playAudio("GenericClick", 0.5f);
         if (interactionMode == WallInteractionMode.Draggable)
         {
             interactionMode = WallInteractionMode.NotTargetable;

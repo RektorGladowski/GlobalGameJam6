@@ -58,6 +58,8 @@ public class RoomGenerator : MonoBehaviour
                 room.OnRoomTypeSelected += OnRoomTypeSelected;
                 rooms.Add(roomDatas[i].ID, room);
                 am.playAudio("BuildingRoom", 0.3f);
+
+                TutorialManager.instance.OnRoomCreated();
             }
         }
     }
@@ -67,14 +69,17 @@ public class RoomGenerator : MonoBehaviour
         switch (roomType)
         {
             case RoomTypeSelection.Kitchen:
+                TutorialManager.instance.OnKitchenRoomCreated();
                 am.playAudio("AssignRoom-Kitchen", 0.3f);
                 room.material = kitchenMaterial; break;
 
             case RoomTypeSelection.Barracks:
+                TutorialManager.instance.OnBarracksCreated();
                 am.playAudio("AssignRoom-Warrior", 0.3f);
                 room.material = baracksRoomMaterial; break;
 
             case RoomTypeSelection.ScavengerRoom:
+                TutorialManager.instance.OnScavengerRoomCreated();
                 am.playAudio("AssignRoom-Scav", 0.3f);
                 room.material = scavengerRoomMaterial; break;
         }
