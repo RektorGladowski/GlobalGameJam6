@@ -35,12 +35,11 @@ public class HouseManager : MonoBehaviour
             if (outerWalls.Area < roomData.Area) outerWalls = roomData;
             else
             {
-                Debug.Log("AREA: " + roomData.Area);
                 roomDatas.Add(roomData);
             }
         }
 
-        Debug.Log("Height: " + GetHeight(outerWalls));
+        UIManager.instance.UpdateTotalHeight(GetHeight(outerWalls));
 
         OnHouseRebuild?.Invoke(roomDatas.ToArray());
     }
@@ -57,6 +56,22 @@ public class HouseManager : MonoBehaviour
         }
         return max;
     }
+
+    public Vector3 GetHouseCenterPoint()
+    {
+        Bounds houseBouds = compositeCollider.bounds;
+        float bottomY = houseBouds.center.y - houseBouds.extents.y;
+        Vector3 housePos = houseBouds.center;
+        housePos.y = bottomY;
+        return housePos;
+    }
+
+    public float GetHouseMaxDistance()
+    {
+        Bounds houseBouds = compositeCollider.bounds;
+        return Mathf.Max(houseBouds.size.x, houseBouds.size.y) * 1.5f;
+    }
+
 }
 
 [System.Serializable]
