@@ -69,6 +69,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
 
     void Reserve(ITurret turret)
     {
+        if (turret == null) { return; }
         turret.Enter();
         reservedTurret = turret;
     }
@@ -117,17 +118,18 @@ public class WarriorMachine : MonoBehaviour, IDamageable
             }
         }
 
-        if (bestTurret == null) { return; }
 
         // Reserve a spot
-        if (reservedTurret != bestTurret)
+        if (bestTurret != null && reservedTurret != bestTurret)
         {
-            if (reservedTurret!= null) { CancelReservation(); }
+            if (reservedTurret != null) { CancelReservation(); }
             Reserve(bestTurret);
         }
 
+        if (reservedTurret == null) { return; }
+
         // Walk
-        Move(bestTurret.Position);
+        Move(reservedTurret.Position);
 
         // Check if within reach
         if (bestDistance > USE_RADIUS) { return; }
@@ -254,7 +256,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
         }
     }
 
-    void Turret_Leave()
+    void Turret_Exit()
     {
         CancelReservation();
     }

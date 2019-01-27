@@ -34,7 +34,7 @@ public class Home : MonoBehaviour, IHome
             foreach (var obj in WallObjects)
             {
                 // Hack, proper implementation of IHome should be better
-                IWall wall = obj.GetComponent<Pantry>();
+                IWall wall = obj.GetComponent<IWall>();
 
                 if (wall != null)
                 {
