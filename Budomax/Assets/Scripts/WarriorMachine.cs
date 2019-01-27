@@ -13,6 +13,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
     const float TICK_INTERVAL = 1f;
     const float FIRE_RANGE = 3f;
     const int DAMAGE = 1;
+    public AudioManager am;
 
     public GameObject HomeObject;
     IHome home; // TODO: Get from some singleton
@@ -29,6 +30,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
 
     void Awake()
     {
+        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         Health = 5;
         home = HomeObject.GetComponent<IHome>();
         fsm = StateMachine<WarriorStates>.Initialize(this);
@@ -85,10 +87,12 @@ public class WarriorMachine : MonoBehaviour, IDamageable
     public void Damage(int damage)
     {
         Health -= damage;
+        am.playAudio("RecieveDamage", 0.3f);
 
         if (Health <= 0)
         {
             // TODO: Destroy
+            am.playAudio("UnitDeath", 0.3f);
         }
     }
 
@@ -203,6 +207,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(ACTION_TIME);
 
         // Eat
+        am.playAudio("Eating", 0.3f);
         if (visitedPantry.Food == 0)
         {
             fsm.ChangeState(WarriorStates.WannaEat);
@@ -293,6 +298,7 @@ public class WarriorMachine : MonoBehaviour, IDamageable
 
             // Fire
             // TODO: Hide warrior, rotate turret
+            am.playAudio("WarriorShot", 0.3f);
             var dmg = targetEnemy.GetComponent<IDamageable>();
             dmg?.Damage(DAMAGE);
 

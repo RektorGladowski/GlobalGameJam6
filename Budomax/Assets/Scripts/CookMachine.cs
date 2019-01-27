@@ -2,6 +2,7 @@
 using System.Collections;
 using MonsterLove.StateMachine;
 using State;
+using Hellmade.Sound;
 
 public class CookMachine : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CookMachine : MonoBehaviour
     const int COOKING_SKILL = 20;
     const int ACTION_TIME = 4;
     const float MOVEMENT_FORCE = 1f;
+    public AudioManager am;
 
     public GameObject HomeObject;
     IHome home; // TODO: Get from some singleton
@@ -22,6 +24,7 @@ public class CookMachine : MonoBehaviour
 
     void Awake()
     {
+        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         home = HomeObject.GetComponent<IHome>();
         fsm = StateMachine<States>.Initialize(this);
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -105,7 +108,9 @@ public class CookMachine : MonoBehaviour
     {
         carriedFood += COOKING_SKILL;
 
+        am.playAudio("BuildOneWall", 0.3f);
         yield return new WaitForSeconds(ACTION_TIME);
+
 
         fsm.ChangeState(States.WannaStock);
     }
@@ -147,7 +152,7 @@ public class CookMachine : MonoBehaviour
     {
         int space = visitedPantry.MaxFood - visitedPantry.Food;
         int filled = Mathf.Min(space, carriedFood);
-
+        am.playAudio("RestockFeeder", 0.3f);
         yield return new WaitForSeconds(ACTION_TIME);
 
         if (space == 0)

@@ -9,6 +9,7 @@ public class RoomGenerator : MonoBehaviour
 
     public HouseManager houseManager { get { if (_houseManager == null) _houseManager = GetComponent<HouseManager>(); return _houseManager; } }
     private HouseManager _houseManager;
+    public AudioManager am;
 
     [SerializeField] private Material kitchenMaterial;
     [SerializeField] private Material baracksRoomMaterial;
@@ -17,6 +18,7 @@ public class RoomGenerator : MonoBehaviour
     private void Awake() {
         
         houseManager.OnHouseRebuild = UpdateRooms;
+        am = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
     private void OnDestroy() { houseManager.OnHouseRebuild = null; }
 
@@ -42,6 +44,7 @@ public class RoomGenerator : MonoBehaviour
                 Room room = go.GetComponent<Room>();
                 room.OnRoomTypeSelected += OnRoomTypeSelected;
                 rooms.Add(roomDatas[i].ID, room);
+                am.playAudio("BuildingRoom", 0.3f);
             }
         }
     }
@@ -50,9 +53,17 @@ public class RoomGenerator : MonoBehaviour
     {
         switch (roomType)
         {
-            case RoomTypeSelection.Kitchen: room.material = kitchenMaterial; break;
-            case RoomTypeSelection.Barracks: room.material = baracksRoomMaterial; break;
-            case RoomTypeSelection.ScavengerRoom: room.material = scavengerRoomMaterial; break;
+            case RoomTypeSelection.Kitchen:
+                am.playAudio("AssignRoom-Kitchen", 0.3f);
+                room.material = kitchenMaterial; break;
+
+            case RoomTypeSelection.Barracks:
+                am.playAudio("AssignRoom-Warrior", 0.3f);
+                room.material = baracksRoomMaterial; break;
+
+            case RoomTypeSelection.ScavengerRoom:
+                am.playAudio("AssignRoom-Scav", 0.3f);
+                room.material = scavengerRoomMaterial; break;
         }
     }
 
